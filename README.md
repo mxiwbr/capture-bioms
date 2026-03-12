@@ -5,7 +5,7 @@
 ![License](https://img.shields.io/badge/license-GPLv3-lightgrey)
 ![Open Source](https://img.shields.io/badge/Open%20Source-Yes-brightgreen)
 
-A PaperMC plugin that lets players capture the current biome in a bottle.
+A PaperMC plugin that lets players capture a biome in a bottle.
 
 ## License
 This plugin is licensed under the **GNU General Public License v3**.  
