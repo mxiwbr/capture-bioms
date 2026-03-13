@@ -1,5 +1,6 @@
 package io.github.mxiwbr.capturebioms.listener;
 
+import io.github.mxiwbr.capturebioms.BeaconRitual;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Beacon;
@@ -9,8 +10,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ItemSpawnEvent;
 
-public class XpBottleListener implements Listener {
+/**
+ * Listener Class for Item Events
+ */
+public class ItemListener implements Listener {
 
+    /**
+     * Called when an item entity is created
+     * @param event
+     */
     @EventHandler
     public void onItemSpawn(ItemSpawnEvent event) {
 
@@ -47,7 +55,7 @@ public class XpBottleListener implements Listener {
         // Cancel if there are not enough xp-bottles
         if (itemAmount < requiredBottleAmount) { return; }
 
-
+        BeaconRitual.startBeaconRitual(location, item, requiredBottleAmount, tier);
     }
 
 }

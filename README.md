@@ -1,4 +1,4 @@
-# Capture Bioms
+# Capture Biomes
 
 [![Java](https://img.shields.io/badge/Java-21-brightgreen)](https://www.java.com/)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.11-blue)](https://www.minecraft.net/)
