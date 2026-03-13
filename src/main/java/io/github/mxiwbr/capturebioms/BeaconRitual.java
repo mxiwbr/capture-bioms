@@ -91,10 +91,7 @@ public class BeaconRitual {
         }
 
         // set the amount of biome potions to get
-        // beacon tier 1 -> 1x
-        // beacon tier 2 -> 2x
-        // ...
-        potion.setAmount(beaconTier);
+        potion.setAmount(CaptureBioms.CONFIG.getBiomePotionCount()[beaconTier - 1]);
         ParticleUtils.spawnParticleSpiral(beacon.getLocation(), BiomeUtils.getBiomeColor(biome.getKey().getKey()));
         // drop potion on location and play sound
         world.dropItemNaturally(location, potion);

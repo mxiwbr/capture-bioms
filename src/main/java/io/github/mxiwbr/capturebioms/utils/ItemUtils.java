@@ -38,11 +38,9 @@ public class ItemUtils {
      * Checks every [checkInterval] ticks if an item is on the ground.
      * Timeout after [timeoutTicks] ticks.
      * @param item
-     * @param timeoutTicks how long the method should run (check) in ticks
-     * @param checkInterval
      * @param callback
      */
-    public static void checkItemOnGround(Item item, int timeoutTicks, int checkInterval, ItemGroundCallback callback) {
+    public static void checkItemOnGround(Item item, ItemGroundCallback callback) {
 
         // A new Bukkit Task (BukkitRunnable)
         new BukkitRunnable() {
@@ -54,7 +52,7 @@ public class ItemUtils {
             public void run() {
 
                 // if the item is not there anymore or the elapsed time is more than it should be, cancel the task and return
-                if (!item.isValid() || elapsed >= timeoutTicks) {
+                if (!item.isValid() || elapsed >= CaptureBioms.CONFIG.getTimeoutTicks()) {
 
                     this.cancel();
 
@@ -70,11 +68,11 @@ public class ItemUtils {
                 }
 
                 // increase the timer
-                elapsed += checkInterval;
+                elapsed += CaptureBioms.CONFIG.getIntervalTicks();
             }
 
             // run Task (directly after 0 Ticks, loop every [checkInterval] ticks
-        }.runTaskTimer(CaptureBioms.INSTANCE, 0L, checkInterval);
+        }.runTaskTimer(CaptureBioms.INSTANCE, 0L, CaptureBioms.CONFIG.getIntervalTicks());
     }
 
 }

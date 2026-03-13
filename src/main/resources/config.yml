@@ -1,0 +1,23 @@
+﻿# Capture Biomes Plugin Configuration
+
+# --- Beacon ritual items ---
+beacon:
+  required-xp-bottles:                # XP bottles required for every beacon level
+    tier-1: 16
+    tier-2: 32
+    tier-3: 48
+    tier-4: 64
+  biome-bottles-per-tier:             # Biome Potions you'll get per beacon level
+    tier-1: 1
+    tier-2: 2
+    tier-3: 3
+    tier-4: 4
+  trigger_item: EXPERIENCE_BOTTLE     # The item that must be thrown on the beacon to trigger the biome capture
+                                      # See https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html for the item names
+
+# --- TECHNICAL STUFF - Don't change if you don't now what you're doing! - Could crash your server! ---
+
+# --- Item checking (for XP bottles on beacon) ---
+item-check:
+  timeout-ticks: 200          # How long the plugin checks for items being on ground in ticks
+  interval-ticks: 2           # Interval between each check in ticks

@@ -11,10 +11,15 @@ public final class CaptureBioms extends JavaPlugin {
     public static Logger LOGGER;
     public static CaptureBioms INSTANCE;
 
+    public static Config CONFIG;
+
     // Called when the plugin is enabled
     @Override
     public void onEnable() {
 
+        // creates a default config.yml if there is none
+        saveDefaultConfig();
+        CONFIG = new Config();
         // Global plugin instance object
         INSTANCE = this;
         // Set logger object to log from other classes

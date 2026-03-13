@@ -28,9 +28,9 @@ public class ItemListener implements Listener {
         Item item = event.getEntity();
 
         // Cancel if the item is not an experience bottle
-        if (item.getItemStack().getType() != Material.EXPERIENCE_BOTTLE) { return; }
+        if (item.getItemStack().getType() != CaptureBioms.CONFIG.getTriggerItem()) { return; }
 
-        ItemUtils.checkItemOnGround(item, 200, 2, () -> {
+        ItemUtils.checkItemOnGround(item, () -> {
 
             // The item's location
             Location location = item.getLocation();
@@ -47,10 +47,10 @@ public class ItemListener implements Listener {
 
             // Required amount of xp-bottles per tier
             int requiredBottleAmount = switch (tier) {
-                case 1 -> 16;
-                case 2 -> 32;
-                case 3 -> 48;
-                default -> 64;
+                case 1 -> CaptureBioms.CONFIG.getRequiredItemCount()[0];
+                case 2 -> CaptureBioms.CONFIG.getRequiredItemCount()[1];
+                case 3 -> CaptureBioms.CONFIG.getRequiredItemCount()[2];
+                default -> CaptureBioms.CONFIG.getRequiredItemCount()[3];
             };
 
             // Get amount of items on the beacon
