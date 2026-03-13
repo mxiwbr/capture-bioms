@@ -9,11 +9,14 @@ public final class CaptureBioms extends JavaPlugin {
 
     // Console logger
     public static Logger LOGGER;
+    public static CaptureBioms INSTANCE;
 
     // Called when the plugin is enabled
     @Override
     public void onEnable() {
 
+        // Global plugin instance object
+        INSTANCE = this;
         // Set logger object to log from other classes
         LOGGER = getLogger();
         LOGGER.info("Enabled!");

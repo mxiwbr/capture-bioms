@@ -1,6 +1,8 @@
 package io.github.mxiwbr.capturebioms.listener;
 
 import io.github.mxiwbr.capturebioms.BeaconRitual;
+import io.github.mxiwbr.capturebioms.CaptureBioms;
+import io.github.mxiwbr.capturebioms.utils.ItemUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Beacon;
@@ -28,34 +30,38 @@ public class ItemListener implements Listener {
         // Cancel if the item is not an experience bottle
         if (item.getItemStack().getType() != Material.EXPERIENCE_BOTTLE) { return; }
 
-        // The item's location
-        Location location = item.getLocation();
+        ItemUtils.checkItemOnGround(item, 200, 2, () -> {
 
-        // The block on which the item is placed
-        Block blockBelow = location.getBlock().getRelative(0, -1, 0);
+            // The item's location
+            Location location = item.getLocation();
 
-        // Ensure the block below is a working Beacon
-        if (blockBelow.getType() != Material.BEACON) { return; }
-        if (!(blockBelow.getState() instanceof Beacon beacon) || beacon.getTier() == 0) { return; }
+            // The block on which the item is placed
+            Block blockBelow = location.getBlock().getRelative(0, -1, 0);
 
-        // Get the beacon tier (1 - 4) to determine how much biome bottles the player should get (1 - 4)
-        int tier  = beacon.getTier();
+            // Ensure the block below is a working Beacon
+            if (blockBelow.getType() != Material.BEACON) { return; }
+            if (!(blockBelow.getState() instanceof Beacon beacon) || beacon.getTier() == 0) { return; }
 
-        // Required amount of xp-bottles per tier
-        int requiredBottleAmount = switch (tier) {
-            case 1 -> 16;
-            case 2 -> 32;
-            case 3 -> 48;
-            default -> 64;
-        };
+            // Get the beacon tier (1 - 4) to determine how much biome bottles the player should get (1 - 4)
+            int tier  = beacon.getTier();
 
-        // Get amount of items on the beacon
-        int itemAmount = item.getItemStack().getAmount();
+            // Required amount of xp-bottles per tier
+            int requiredBottleAmount = switch (tier) {
+                case 1 -> 16;
+                case 2 -> 32;
+                case 3 -> 48;
+                default -> 64;
+            };
 
-        // Cancel if there are not enough xp-bottles
-        if (itemAmount < requiredBottleAmount) { return; }
+            // Get amount of items on the beacon
+            int itemAmount = item.getItemStack().getAmount();
 
-        BeaconRitual.startBeaconRitual(location, item, requiredBottleAmount, tier);
+            // Cancel if there are not enough xp-bottles
+            if (itemAmount < requiredBottleAmount) { return; }
+
+            BeaconRitual.startBeaconRitual(location, item, requiredBottleAmount, tier);
+
+        });
     }
 
 }
