@@ -27,6 +27,45 @@ A PaperMC plugin that lets players capture a biome in a bottle and release it el
 ## Supported Versions
 - PaperMC on Minecraft Version 1.21.11
 
+## Config
+Edit the `config.yml` in the plugin's folder to adapt it to your preferences:
+```
+# Capture Biomes Plugin Configuration
+
+# --- Beacon ritual items ---
+beacon:
+required-xp-bottles:                # XP bottles required for every beacon level
+tier-1: 16
+tier-2: 32
+tier-3: 48
+tier-4: 64
+biome-bottles-per-tier:             # Biome Potions you'll get per beacon level
+tier-1: 1
+tier-2: 2
+tier-3: 3
+tier-4: 4
+trigger_item: EXPERIENCE_BOTTLE     # The item that must be thrown on the beacon to trigger the biome capture
+# See https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html for the item names
+
+# --- Biome Potions ---
+potion-cooldown:                      # cooldown of the biome potions
+# recommended to leave enabled to prevent players from crashing / lagging the server by throwing too many potions at once
+
+enabled: true                        # default: true
+# boolean (true / false)
+
+length: 30                          # default: 30
+# full seconds
+# only relevant if enabled is true
+
+# --- Advanced settings – only change if you know what you're doing ---
+
+# --- Item checking (for XP bottles on beacon) ---
+item-check:
+timeout-ticks: 200                  # How long the plugin checks for each item being on ground in ticks (20 ticks = 1 second)
+interval-ticks: 2                   # Interval between each check in ticks (20 ticks = 1 second)``
+```
+
 ## Supported Biomes and Dimensions
 This plugin only supports following **overworld biomes**.
 Nether, End and Cave biomes as well as custom biomes and dimensions are currently not supported and will be ignored.

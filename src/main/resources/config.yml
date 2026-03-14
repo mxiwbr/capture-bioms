@@ -19,7 +19,7 @@ beacon:
 potion-cooldown:                      # cooldown of the biome potions
                                       # recommended to leave enabled to prevent players from crashing / lagging the server by throwing too many potions at once
 
-  enabled: true                        # default: true
+  enabled: true                       # default: true
                                       # boolean (true / false)
 
   length: 30                          # default: 30
