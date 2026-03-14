@@ -26,7 +26,7 @@ public class UpdateService {
             var httpClient = HttpClient.newHttpClient();
             var httpRequest = HttpRequest.newBuilder()
                     .uri(URI.create("https://api.github.com/repos/mxiwbr/capture-biomes/releases/latest"))
-                    .header("Accept", "\"application/vnd.github.v3+json\"")
+                    .header("Accept", "application/vnd.github.v3+json")
                     .build();
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             httpClient.close();
