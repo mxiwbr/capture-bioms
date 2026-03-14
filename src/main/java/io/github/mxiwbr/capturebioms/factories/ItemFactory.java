@@ -1,6 +1,7 @@
-package io.github.mxiwbr.capturebioms.utils;
+package io.github.mxiwbr.capturebioms.factories;
 
 import io.github.mxiwbr.capturebioms.CaptureBioms;
+import io.github.mxiwbr.capturebioms.utils.BiomeUtils;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.TooltipDisplay;
 import io.papermc.paper.datacomponent.item.UseCooldown;

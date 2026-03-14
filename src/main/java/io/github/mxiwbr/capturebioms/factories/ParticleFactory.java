@@ -1,4 +1,4 @@
-package io.github.mxiwbr.capturebioms.utils;
+package io.github.mxiwbr.capturebioms.factories;
 
 import io.github.mxiwbr.capturebioms.CaptureBioms;
 import org.bukkit.Color;
@@ -6,14 +6,14 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class ParticleUtils {
+public class ParticleFactory {
 
     /**
-     * Spawns a double DNA-like particle spiral around a given location
+     * Creates a double DNA-like particle spiral around a given location
      * @param center central coordinate of the spiral
      * @param color color of the spiral
      */
-    public static void spawnParticleSpiral(Location center, Color color) {
+    public static void createParticleSpiral(Location center, Color color) {
 
         new BukkitRunnable() {
 

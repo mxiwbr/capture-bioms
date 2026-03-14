@@ -1,9 +1,9 @@
 package io.github.mxiwbr.capturebioms;
 
 import io.github.mxiwbr.capturebioms.utils.BiomeUtils;
-import io.github.mxiwbr.capturebioms.utils.ItemFactory;
+import io.github.mxiwbr.capturebioms.factories.ItemFactory;
 import io.github.mxiwbr.capturebioms.utils.ItemUtils;
-import io.github.mxiwbr.capturebioms.utils.ParticleUtils;
+import io.github.mxiwbr.capturebioms.factories.ParticleFactory;
 import org.bukkit.*;
 import org.bukkit.block.Beacon;
 import org.bukkit.block.Biome;
@@ -59,7 +59,7 @@ public class BeaconRitual {
 
         // get the amount of potions set in the config (default 1)
         potion.setAmount(CaptureBioms.CONFIG.getBiomePotionsAmount());
-        ParticleUtils.spawnParticleSpiral(beacon.getLocation(), BiomeUtils.getBiomeColor(biome.getKey().getKey()));
+        ParticleFactory.createParticleSpiral(beacon.getLocation(), BiomeUtils.getBiomeColor(biome.getKey().getKey()));
         // drop potion on location and play sound
         world.dropItemNaturally(location, potion);
         world.playSound(location, Sound.ENTITY_ITEM_PICKUP, 1, 1);
