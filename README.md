@@ -22,7 +22,7 @@ A PaperMC plugin that lets players capture a biome in a bottle and release it el
    - Tier 3 Beacon + 48 XP bottles → 3 Biome Potions
    - Tier 4 Beacon + 64 XP bottles → 4 Biome Potions
 3. The beacon automatically creates a **Biome Potion** of the biome in which the beacon is located
-4. Throw the potion on the ground in another biome to change the biome of the current chunk
+4. Throw the potion on the ground in another biome to change the biome in the area
 
 ## Supported Versions
 - PaperMC on Minecraft Version 1.21.11
