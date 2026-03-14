@@ -32,20 +32,23 @@ public class Config {
                     config.getInt("beacon.required-xp-bottles.tier-2"),
                     config.getInt("beacon.required-xp-bottles.tier-3"),
                     config.getInt("beacon.required-xp-bottles.tier-4") };
+            // Use default config if amount of required items is more than allowed (max 64)
+            for (int itemCount : this.requiredItemCount) { if (itemCount > 64) { throw new Exception(); } }
+
             // Amount of biome potions to get per tier
             this.biomePotionSize = new int[] { config.getInt("beacon.biome-potions-size.tier-1"),
                     config.getInt("beacon.biome-potions-size.tier-2"),
                     config.getInt("beacon.biome-potions-size.tier-3"),
                     config.getInt("beacon.biome-potions-size.tier-4") };
+            // Use default config if odd numbers occur
+            for (int number : this.biomePotionSize) { if (number % 2 != 0) { throw new Exception(); } }
+
             this.triggerItem = Material.valueOf(config.getString("beacon.trigger_item"));
             this.biomePotionsAmount = config.getInt("beacon.biome-potions-amount");
             this.enablePotionCooldown = config.getBoolean("potion-cooldown.enabled");
             this.potionCooldown = config.getInt("potion-cooldown.length");
             this.timeoutTicks = config.getInt("item-check.timeout-ticks");
             this.intervalTicks = config.getInt("item-check.interval-ticks");
-
-            // Use default config if amount of required items is more than allowed (max 64)
-            for (int itemCount : this.requiredItemCount) { if (itemCount > 64) { throw new Exception(); } }
 
         // Set to defaults if config couldn't be loaded
         } catch (Exception e) {

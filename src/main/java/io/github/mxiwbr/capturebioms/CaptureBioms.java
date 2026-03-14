@@ -1,5 +1,6 @@
 package io.github.mxiwbr.capturebioms;
 
+import io.github.mxiwbr.capturebioms.listener.EntityListener;
 import io.github.mxiwbr.capturebioms.listener.ItemListener;
 import io.github.mxiwbr.capturebioms.services.UpdateService;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,8 +35,10 @@ public final class CaptureBioms extends JavaPlugin {
         LOGGER.info("Enabled!");
         Boolean newVersionAvailable = UpdateService.checkForUpdates();
 
-        // Register XpBottleListener() event
+        // Register ItemListener
         getServer().getPluginManager().registerEvents(new ItemListener(), this);
+        // Register EntityListener
+        getServer().getPluginManager().registerEvents(new EntityListener(), this);
     }
 
 }

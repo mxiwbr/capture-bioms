@@ -53,4 +53,51 @@ public class ParticleFactory {
         }.runTaskTimer(CaptureBioms.INSTANCE, 0L, 1L);
     }
 
+    /**
+     * Creates a "square edges" particle animation rising from start location uo to height
+     * Always 15 seconds long
+     * @param center center of animation
+     * @param color
+     * @param size
+     * @param height y-coordinate of highest point
+     */
+    public static void squareRisingEdges(Location center, Color color, int size, double height) {
+
+        final int totalTicks = 300;
+        final double heightPerTick = (height - center.getY()) / totalTicks;
+
+        new BukkitRunnable() {
+
+            int tick = 0;
+
+            @Override
+            public void run() {
+
+                if (tick > totalTicks) {
+                    cancel();
+                    return;
+                }
+
+                double yOffset = tick * heightPerTick;
+
+                for (int x = -size / 2; x <= size / 2; x++) {
+                    for (int z = -size / 2; z <= size / 2; z++) {
+                        if (x == -size / 2 || x == size / 2 || z == -size / 2 || z == size / 2) {
+                            Location loc = center.clone().add(x + 0.5, yOffset, z + 0.5);
+                            center.getWorld().spawnParticle(
+                                    Particle.DUST,
+                                    loc,
+                                    1,
+                                    new Particle.DustOptions(color, 1.5f)
+                            );
+                        }
+                    }
+                }
+
+                tick++;
+            }
+
+        }.runTaskTimer(CaptureBioms.INSTANCE, 0L, 1L);
+    }
+
 }

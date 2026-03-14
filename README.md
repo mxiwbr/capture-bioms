@@ -37,10 +37,7 @@ When thrown, the potion affects a square of `size` × `size` blocks, `size` bein
 
 **Example:** A potion created on a tier 2 Beacon affects an area of 8 × 8 blocks, with the location where the potion lands as the center.
 
-**Height behavior:**
-- If there is a block above the center coordinate, the biome extends up to **five blocks above that block**.
-- If there is no block above the center, the biome extends up to the **world's maximum height** (y = 320).
-- The biome always extends **five blocks below the point where the potion lands**.
+**Height:** The biome always expands up to the max building height
 
 ## Supported Versions
 - PaperMC on Minecraft Version 1.21.11
