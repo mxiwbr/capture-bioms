@@ -63,41 +63,52 @@ public class ParticleFactory {
      */
     public static void squareRisingEdges(Location center, Color color, int size, double height) {
 
-        final int totalTicks = 300;
-        final double heightPerTick = (height - center.getY()) / totalTicks;
+        final double heightPerTick = 0.85;
 
         new BukkitRunnable() {
 
-            int tick = 0;
+            double currentYOffset = 0;
 
             @Override
             public void run() {
 
-                if (tick > totalTicks) {
+                if (center.getY() + currentYOffset >= height) {
                     cancel();
                     return;
                 }
 
-                double yOffset = tick * heightPerTick;
-
                 for (int x = -size / 2; x <= size / 2; x++) {
                     for (int z = -size / 2; z <= size / 2; z++) {
                         if (x == -size / 2 || x == size / 2 || z == -size / 2 || z == size / 2) {
-                            Location loc = center.clone().add(x + 0.5, yOffset, z + 0.5);
+
+                            // up
+                            Location locUp = center.clone().add(x + 0.5, currentYOffset, z + 0.5);
                             center.getWorld().spawnParticle(
                                     Particle.DUST,
-                                    loc,
+                                    locUp,
+                                    1,
+                                    new Particle.DustOptions(color, 1.5f)
+                            );
+
+                            // five blocks down
+                            Location locDown = center.clone().add(x + 0.5, currentYOffset - 5, z + 0.5);
+                            center.getWorld().spawnParticle(
+                                    Particle.DUST,
+                                    locDown,
                                     1,
                                     new Particle.DustOptions(color, 1.5f)
                             );
                         }
+
+
                     }
                 }
 
-                tick++;
+                currentYOffset += heightPerTick;
             }
 
         }.runTaskTimer(CaptureBioms.INSTANCE, 0L, 1L);
     }
+
 
 }

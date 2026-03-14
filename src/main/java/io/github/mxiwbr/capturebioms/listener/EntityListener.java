@@ -2,12 +2,10 @@ package io.github.mxiwbr.capturebioms.listener;
 
 import io.github.mxiwbr.capturebioms.CaptureBioms;
 import io.github.mxiwbr.capturebioms.factories.ParticleFactory;
-import net.kyori.adventure.key.Key;
+import io.github.mxiwbr.capturebioms.utils.BlockUtils;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.entity.AreaEffectCloud;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -48,8 +46,11 @@ public class EntityListener implements Listener {
         final int tier = pdc.get(key, PersistentDataType.INTEGER);
         areaEffectCloud.setRadius(0);
 
+        final int maxHeight = potionEntity.getLocation().getWorld().getMaxHeight();
+        // next block above the location where the potion was thrown
+        final int nextBlockY = BlockUtils.getNextSolidBlockY(potionEntity.getLocation());
 
-        // particle effect up to max world height
+        // particle effect up to max world height or next block on y coordinate above the block
         ParticleFactory.squareRisingEdges(potionEntity.getLocation(),
                 potionEntity.getPotionMeta().getColor(),
                 switch (tier) {
@@ -58,7 +59,7 @@ public class EntityListener implements Listener {
                     case 4 -> CaptureBioms.CONFIG.getBiomePotionSize()[3];
                     default -> CaptureBioms.CONFIG.getBiomePotionSize()[0];
                 },
-                potionEntity.getLocation().getWorld().getMaxHeight());
+                Math.min(nextBlockY + 5, maxHeight));
     }
 
 }
