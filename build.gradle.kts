@@ -22,6 +22,8 @@ dependencies {
     // Lombok
     compileOnly("org.projectlombok:lombok:1.18.30")
     annotationProcessor("org.projectlombok:lombok:1.18.30")
+    // Gson implementation for plugin update service
+    implementation("com.google.code.gson:gson:2.10.1")
 }
 
 tasks.test {

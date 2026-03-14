@@ -19,7 +19,6 @@ public class ItemListener implements Listener {
 
     /**
      * Called when an item entity is created
-     * @param event
      */
     @EventHandler
     public void onItemSpawn(ItemSpawnEvent event) {
