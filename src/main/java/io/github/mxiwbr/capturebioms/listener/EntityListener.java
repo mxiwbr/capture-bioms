@@ -4,6 +4,7 @@ import io.github.mxiwbr.capturebioms.CaptureBioms;
 import io.github.mxiwbr.capturebioms.factories.ParticleFactory;
 import io.github.mxiwbr.capturebioms.utils.BiomeUtils;
 import io.github.mxiwbr.capturebioms.utils.BlockUtils;
+import io.github.mxiwbr.capturebioms.utils.ConsoleUtils;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.NamespacedKey;
@@ -20,6 +21,8 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.BoundingBox;
 import com.destroystokyo.paper.*;
+
+import static io.github.mxiwbr.capturebioms.utils.ConsoleUtils.logConsole;
 
 /**
  * Listener class for entity events
@@ -50,6 +53,9 @@ public class EntityListener implements Listener {
 
         // Cancel and delete areaEffectCloud if not in overworld
         if (world.getEnvironment() != World.Environment.NORMAL) {
+
+            logConsole("Creation of biome bottle at " + potionEntity.getLocation() + " failed: the biome is either not supported or could not be found. " +
+                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.logType.WARNING);
             areaEffectCloud.remove();
             return;
         }

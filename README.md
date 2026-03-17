@@ -66,7 +66,7 @@ beacon:
     tier-4: 32
   trigger_item: EXPERIENCE_BOTTLE     # The item that must be thrown on the beacon to trigger the biome capture
                                       # See https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html for the item names
-  biome-potions-amount: 1             #  default: 1 | amount of Biome Potions to get each time
+  biome-potions-amount: 1             # default: 1 | amount of Biome Potions to get each time
 
 # --- Biome Potions ---
 potion-cooldown:                      # cooldown of the biome potions
@@ -81,6 +81,12 @@ potion-cooldown:                      # cooldown of the biome potions
                                       # only relevant if enabled is true
 
 # --- Advanced settings – only change if you know what you're doing ---
+
+# --- Console Logging ---
+console:
+  enable-logging: true                # default: true
+                                      # boolean (true / false)
+                                      # if you set this to false, all console logging will be disabled. This includes all info logs as well as warnings and severe errors
 
 # --- Item checking (for XP bottles on beacon) ---
 item-check:

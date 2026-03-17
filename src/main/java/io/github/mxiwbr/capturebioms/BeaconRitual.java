@@ -2,6 +2,7 @@ package io.github.mxiwbr.capturebioms;
 
 import io.github.mxiwbr.capturebioms.utils.BiomeUtils;
 import io.github.mxiwbr.capturebioms.factories.ItemFactory;
+import io.github.mxiwbr.capturebioms.utils.ConsoleUtils;
 import io.github.mxiwbr.capturebioms.utils.ItemUtils;
 import io.github.mxiwbr.capturebioms.factories.ParticleFactory;
 import org.bukkit.*;
@@ -9,6 +10,10 @@ import org.bukkit.block.Beacon;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
+
+import java.io.Console;
+
+import static io.github.mxiwbr.capturebioms.utils.ConsoleUtils.logConsole;
 
 public class BeaconRitual {
 
@@ -24,8 +29,9 @@ public class BeaconRitual {
         // not supported: nether, end, custom
         var world = location.getWorld();
         if (world == null || world.getEnvironment() != World.Environment.NORMAL) {
-            CaptureBioms.LOGGER.warning("Creation of biome bottle at " + location.toString() + " failed: the dimension is either not supported or not found. " +
-                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues");
+
+            logConsole("Creation of biome bottle at " + location + " failed: the dimension is either not supported or not found. " +
+                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.logType.WARNING);
             return;
         }
 
@@ -35,8 +41,8 @@ public class BeaconRitual {
         // Cancel if biome is not supported or
         if (BiomeUtils.getBiomeColor(biome.getKey().getKey()) == null) {
 
-            CaptureBioms.LOGGER.warning("Creation of biome bottle at " + location.toString() + " failed: the biome is either not supported or could not be found. " +
-                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues");
+            logConsole("Creation of biome bottle at " + location + " failed: the biome is either not supported or could not be found. " +
+                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.logType.WARNING);
             return;
 
         }
@@ -52,8 +58,8 @@ public class BeaconRitual {
         ItemStack potion = ItemFactory.createBiomePotion(biome, beaconTier);
         if (potion == null) {
 
-            CaptureBioms.LOGGER.warning("Creation of biome bottle at " + location.toString() + " failed: the biome is either not supported or could not be found. " +
-                                            "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues");
+            logConsole("Creation of biome bottle at " + location + " failed: the biome is either not supported or could not be found. " +
+                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.logType.WARNING);
             return;
         }
 

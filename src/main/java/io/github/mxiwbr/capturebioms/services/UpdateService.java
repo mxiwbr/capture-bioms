@@ -3,11 +3,15 @@ package io.github.mxiwbr.capturebioms.services;
 import io.github.mxiwbr.capturebioms.CaptureBioms;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import io.github.mxiwbr.capturebioms.utils.ConsoleUtils;
 
+import java.io.Console;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+
+import static io.github.mxiwbr.capturebioms.utils.ConsoleUtils.logConsole;
 
 public class UpdateService {
 
@@ -18,7 +22,7 @@ public class UpdateService {
 
         final String pluginVersion = CaptureBioms.INSTANCE.getPluginMeta().getVersion();
 
-        CaptureBioms.LOGGER.info("Checking for updates...");
+        logConsole("Checking for updates...", ConsoleUtils.logType.INFO);
 
         try {
 
@@ -39,19 +43,19 @@ public class UpdateService {
             // Check if new version is available and log it
             if (!pluginVersion.equals(latestPluginVersion)) {
 
-                CaptureBioms.LOGGER.info("A new plugin version is available: " + latestPluginVersion);
-                CaptureBioms.LOGGER.info("You're on: " + pluginVersion);
+                logConsole("A new plugin version is available: " + latestPluginVersion, ConsoleUtils.logType.INFO);
+                logConsole("You're on: " + pluginVersion, ConsoleUtils.logType.INFO);
 
                 return true;
             }
 
-            CaptureBioms.LOGGER.info("You're up to date!");
+            logConsole("You're up to date!", ConsoleUtils.logType.INFO);
 
         } catch (Exception e) {
 
-            CaptureBioms.LOGGER.warning("An error occurred while checking for updates:");
-            CaptureBioms.LOGGER.warning(e.getClass().getSimpleName() + " - " + e.getMessage());
-            e.printStackTrace();
+            logConsole("An error occurred while checking for updates:", ConsoleUtils.logType.WARNING);
+            logConsole(e.getClass().getSimpleName() + " - " + e.getMessage(), ConsoleUtils.logType.WARNING);
+            if (CaptureBioms.CONFIG.isEnableConsoleLogging()) { e.printStackTrace(); }
         }
 
         return false;

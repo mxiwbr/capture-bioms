@@ -26,7 +26,7 @@ public class ItemListener implements Listener {
         // The item that triggered this event
         Item item = event.getEntity();
 
-        // Cancel if the item is not an experience bottle
+        // Cancel if the item is not the trigger item
         if (item.getItemStack().getType() != CaptureBioms.CONFIG.getTriggerItem()) { return; }
 
         ItemUtils.checkItemOnGround(item, () -> {

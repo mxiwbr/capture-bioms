@@ -1,9 +1,12 @@
 package io.github.mxiwbr.capturebioms;
 
 import io.github.mxiwbr.capturebioms.exceptions.ConfigLoadingException;
+import io.github.mxiwbr.capturebioms.utils.ConsoleUtils;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+
+import static io.github.mxiwbr.capturebioms.utils.ConsoleUtils.logConsole;
 
 @Getter
 public class Config {
@@ -16,6 +19,7 @@ public class Config {
     private int biomePotionsAmount;
     private boolean enablePotionCooldown;
     private int potionCooldown;
+    private boolean enableConsoleLogging;
     private int timeoutTicks;
     private int intervalTicks;
 
@@ -45,6 +49,7 @@ public class Config {
                     config.getInt("beacon.biome-potions-size.tier-2"),
                     config.getInt("beacon.biome-potions-size.tier-3"),
                     config.getInt("beacon.biome-potions-size.tier-4")};
+
             // Use default config if odd numbers occur
             for (int number : this.biomePotionSize) {
                 if (number % 2 != 0) {
@@ -54,15 +59,19 @@ public class Config {
 
             this.triggerItem = Material.valueOf(config.getString("beacon.trigger_item"));
             this.biomePotionsAmount = config.getInt("beacon.biome-potions-amount");
+
             this.enablePotionCooldown = config.getBoolean("potion-cooldown.enabled");
             this.potionCooldown = config.getInt("potion-cooldown.length");
+
+            this.enableConsoleLogging = config.getBoolean("console.enable-logging");
+
             this.timeoutTicks = config.getInt("item-check.timeout-ticks");
             this.intervalTicks = config.getInt("item-check.interval-ticks");
 
         // Set to defaults if config couldn't be loaded
         } catch (ConfigLoadingException e) {
 
-            CaptureBioms.LOGGER.warning("Failed to load config.yml, using default config: " + e.getMessage());
+            logConsole("Failed to load config.yml, using default config: " + e.getMessage(), ConsoleUtils.logType.WARNING);
 
             // Required items per tier
             this.requiredItemCount = new int[] { 16, 32, 48, 64 };
@@ -77,7 +86,7 @@ public class Config {
 
         } catch (Exception e) {
 
-        CaptureBioms.LOGGER.warning("Failed to load config.yml, using default config.");
+            logConsole("Failed to load config.yml, using default config.", ConsoleUtils.logType.WARNING);
 
         // Required items per tier
         this.requiredItemCount = new int[] { 16, 32, 48, 64 };
