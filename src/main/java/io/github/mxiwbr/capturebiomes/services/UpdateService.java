@@ -11,7 +11,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.logConsole;
+import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.log;
 
 public class UpdateService {
 
@@ -22,7 +22,7 @@ public class UpdateService {
 
         final String pluginVersion = CaptureBiomes.INSTANCE.getPluginMeta().getVersion();
 
-        logConsole("Checking for updates...", ConsoleUtils.LogType.INFO);
+        log("Checking for updates...", ConsoleUtils.LogType.INFO);
 
         try {
 
@@ -31,18 +31,18 @@ public class UpdateService {
             // Check if new version is available and log it
             if (!pluginVersion.equals(latestPluginVersion)) {
 
-                logConsole("A new plugin version is available: " + latestPluginVersion, ConsoleUtils.LogType.INFO);
-                logConsole("You're on: " + pluginVersion, ConsoleUtils.LogType.INFO);
+                log("A new plugin version is available: " + latestPluginVersion, ConsoleUtils.LogType.INFO);
+                log("You're on: " + pluginVersion, ConsoleUtils.LogType.INFO);
 
                 return true;
             }
 
-            logConsole("You're up to date!", ConsoleUtils.LogType.INFO);
+            log("You're up to date!", ConsoleUtils.LogType.INFO);
 
         } catch (Exception e) {
 
-            logConsole("An error occurred while checking for updates:", ConsoleUtils.LogType.WARNING);
-            logConsole(e.getClass().getSimpleName() + " - " + e.getMessage(), ConsoleUtils.LogType.WARNING);
+            log("An error occurred while checking for updates:", ConsoleUtils.LogType.WARNING);
+            log(e.getClass().getSimpleName() + " - " + e.getMessage(), ConsoleUtils.LogType.WARNING);
             if (CaptureBiomes.CONFIG.isEnableConsoleLogging()) { e.printStackTrace(); }
         }
 

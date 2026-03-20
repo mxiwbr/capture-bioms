@@ -1,5 +1,10 @@
 ﻿# Capture Biomes Plugin Configuration
 
+enabled: true                         # enable or disable the plugin's basic functionalities
+                                      # commands as well as update services will still work
+                                      # boolean (true / false)
+                                      # can also be changed in game via /capturebiomes enable or /capturebiomes disable
+
 # --- Beacon ritual items ---
 beacon:
   required-xp-bottles:                # XP bottles required for every beacon level (cannot be more than 64)

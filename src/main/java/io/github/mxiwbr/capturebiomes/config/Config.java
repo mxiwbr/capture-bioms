@@ -4,14 +4,18 @@ import io.github.mxiwbr.capturebiomes.CaptureBiomes;
 import io.github.mxiwbr.capturebiomes.exceptions.ConfigLoadingException;
 import io.github.mxiwbr.capturebiomes.utils.ConsoleUtils;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.logConsole;
+import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.log;
 
 @Getter
 public class Config {
 
+    @Setter
+    // enabled status
+    private boolean pluginEnabled;
     // Required items per tier
     private int[] requiredItemCount;
     // Amount of biome potions to get per tier
@@ -34,6 +38,8 @@ public class Config {
 
         try {
 
+            // enabled status
+            this.pluginEnabled = config.getBoolean("enabled");
             // Required items per tier
             this.requiredItemCount = new int[] {config.getInt("beacon.required-xp-bottles.tier-1"),
                     config.getInt("beacon.required-xp-bottles.tier-2"),
@@ -74,7 +80,7 @@ public class Config {
         // Set to defaults if config couldn't be loaded
         } catch (ConfigLoadingException e) {
 
-            logConsole("Failed to load config.yml, using default config: " + e.getMessage(), ConsoleUtils.LogType.WARNING);
+            log("Failed to load config.yml, using default config: " + e.getMessage(), ConsoleUtils.LogType.WARNING);
 
             // Required items per tier
             this.requiredItemCount = new int[] { 16, 32, 48, 64 };
@@ -91,7 +97,7 @@ public class Config {
 
         } catch (Exception e) {
 
-            logConsole("Failed to load config.yml, using default config.", ConsoleUtils.LogType.WARNING);
+            log("Failed to load config.yml, using default config.", ConsoleUtils.LogType.WARNING);
 
         // Required items per tier
         this.requiredItemCount = new int[] { 16, 32, 48, 64 };

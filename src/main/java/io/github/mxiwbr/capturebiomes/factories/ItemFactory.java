@@ -21,7 +21,7 @@ import org.apache.commons.text.WordUtils;
 import org.bukkit.persistence.PersistentDataType;
 import java.util.List;
 
-import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.logConsole;
+import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.log;
 
 public class ItemFactory {
 
@@ -88,7 +88,7 @@ public class ItemFactory {
             potion.setData(DataComponentTypes.USE_COOLDOWN, useCooldown);
         }
 
-        logConsole("A Biome Potion was created: " + potion.getItemMeta(), ConsoleUtils.LogType.ADDITIONAL_INFO);
+        log("A Biome Potion was created: " + potion.getItemMeta(), ConsoleUtils.LogType.ADDITIONAL_INFO);
 
         return potion;
     }

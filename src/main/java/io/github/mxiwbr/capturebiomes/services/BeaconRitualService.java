@@ -12,7 +12,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
-import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.logConsole;
+import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.log;
 
 public class BeaconRitualService {
 
@@ -29,7 +29,7 @@ public class BeaconRitualService {
         var world = location.getWorld();
         if (world == null || world.getEnvironment() != World.Environment.NORMAL) {
 
-            logConsole("Creation of biome bottle at " + location + " failed: the dimension is either not supported or not found. " +
+            log("Creation of biome bottle at " + location + " failed: the dimension is either not supported or not found. " +
                     "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
             return;
         }
@@ -40,7 +40,7 @@ public class BeaconRitualService {
         // Cancel if biome is not supported or
         if (BiomeUtils.getBiomeColor(biome.getKey().getKey()) == null) {
 
-            logConsole("Creation of biome bottle at " + location + " failed: the biome is either not supported or could not be found. " +
+            log("Creation of biome bottle at " + location + " failed: the biome is either not supported or could not be found. " +
                     "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
             return;
 
@@ -57,7 +57,7 @@ public class BeaconRitualService {
         ItemStack potion = ItemFactory.createBiomePotion(biome, beaconTier);
         if (potion == null) {
 
-            logConsole("Creation of biome bottle at " + location + " failed: the biome is either not supported or could not be found. " +
+            log("Creation of biome bottle at " + location + " failed: the biome is either not supported or could not be found. " +
                     "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
             return;
         }

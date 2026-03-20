@@ -23,6 +23,9 @@ public class ItemListener implements Listener {
     @EventHandler
     public void onItemSpawn(ItemSpawnEvent event) {
 
+        // cancel if plugin functionalities are disabled in the config
+        if (!CaptureBiomes.CONFIG.isPluginEnabled()) { return; }
+
         // The item that triggered this event
         Item item = event.getEntity();
 

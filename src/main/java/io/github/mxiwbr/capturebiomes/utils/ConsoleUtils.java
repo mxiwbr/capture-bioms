@@ -20,7 +20,7 @@ public class ConsoleUtils {
      * @param message the message which should be logged in the server console
      * @param type the type of the log (INFO, ADDITIONAL_INFO, WARNING, SEVERE)
      */
-    public static void logConsole(String message, LogType type) {
+    public static void log(String message, LogType type) {
 
         if (CaptureBiomes.CONFIG.isEnableConsoleLogging()) {
 
