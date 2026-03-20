@@ -1,6 +1,6 @@
 package io.github.mxiwbr.capturebiomes.listener;
 
-import io.github.mxiwbr.capturebiomes.BeaconRitual;
+import io.github.mxiwbr.capturebiomes.services.BeaconRitualService;
 import io.github.mxiwbr.capturebiomes.CaptureBiomes;
 import io.github.mxiwbr.capturebiomes.utils.ItemUtils;
 import org.bukkit.Location;
@@ -58,7 +58,7 @@ public class ItemListener implements Listener {
             // Cancel if there are not enough xp-bottles
             if (itemAmount < requiredBottleAmount) { return; }
 
-            BeaconRitual.startBeaconRitual(location, item, requiredBottleAmount, beacon, tier);
+            BeaconRitualService.startBeaconRitual(location, item, requiredBottleAmount, beacon, tier);
 
         });
     }

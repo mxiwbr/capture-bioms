@@ -1,5 +1,6 @@
-package io.github.mxiwbr.capturebiomes;
+package io.github.mxiwbr.capturebiomes.config;
 
+import io.github.mxiwbr.capturebiomes.CaptureBiomes;
 import io.github.mxiwbr.capturebiomes.exceptions.ConfigLoadingException;
 import io.github.mxiwbr.capturebiomes.utils.ConsoleUtils;
 import lombok.Getter;
@@ -73,7 +74,7 @@ public class Config {
         // Set to defaults if config couldn't be loaded
         } catch (ConfigLoadingException e) {
 
-            logConsole("Failed to load config.yml, using default config: " + e.getMessage(), ConsoleUtils.logType.WARNING);
+            logConsole("Failed to load config.yml, using default config: " + e.getMessage(), ConsoleUtils.LogType.WARNING);
 
             // Required items per tier
             this.requiredItemCount = new int[] { 16, 32, 48, 64 };
@@ -90,7 +91,7 @@ public class Config {
 
         } catch (Exception e) {
 
-            logConsole("Failed to load config.yml, using default config.", ConsoleUtils.logType.WARNING);
+            logConsole("Failed to load config.yml, using default config.", ConsoleUtils.LogType.WARNING);
 
         // Required items per tier
         this.requiredItemCount = new int[] { 16, 32, 48, 64 };

@@ -88,7 +88,7 @@ public class ItemFactory {
             potion.setData(DataComponentTypes.USE_COOLDOWN, useCooldown);
         }
 
-        logConsole("A Biome Potion was created: " + potion.getItemMeta(), ConsoleUtils.logType.ADDITIONAL_INFO);
+        logConsole("A Biome Potion was created: " + potion.getItemMeta(), ConsoleUtils.LogType.ADDITIONAL_INFO);
 
         return potion;
     }

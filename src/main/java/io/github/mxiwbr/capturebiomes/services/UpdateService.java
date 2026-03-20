@@ -22,7 +22,7 @@ public class UpdateService {
 
         final String pluginVersion = CaptureBiomes.INSTANCE.getPluginMeta().getVersion();
 
-        logConsole("Checking for updates...", ConsoleUtils.logType.INFO);
+        logConsole("Checking for updates...", ConsoleUtils.LogType.INFO);
 
         try {
 
@@ -31,18 +31,18 @@ public class UpdateService {
             // Check if new version is available and log it
             if (!pluginVersion.equals(latestPluginVersion)) {
 
-                logConsole("A new plugin version is available: " + latestPluginVersion, ConsoleUtils.logType.INFO);
-                logConsole("You're on: " + pluginVersion, ConsoleUtils.logType.INFO);
+                logConsole("A new plugin version is available: " + latestPluginVersion, ConsoleUtils.LogType.INFO);
+                logConsole("You're on: " + pluginVersion, ConsoleUtils.LogType.INFO);
 
                 return true;
             }
 
-            logConsole("You're up to date!", ConsoleUtils.logType.INFO);
+            logConsole("You're up to date!", ConsoleUtils.LogType.INFO);
 
         } catch (Exception e) {
 
-            logConsole("An error occurred while checking for updates:", ConsoleUtils.logType.WARNING);
-            logConsole(e.getClass().getSimpleName() + " - " + e.getMessage(), ConsoleUtils.logType.WARNING);
+            logConsole("An error occurred while checking for updates:", ConsoleUtils.LogType.WARNING);
+            logConsole(e.getClass().getSimpleName() + " - " + e.getMessage(), ConsoleUtils.LogType.WARNING);
             if (CaptureBiomes.CONFIG.isEnableConsoleLogging()) { e.printStackTrace(); }
         }
 

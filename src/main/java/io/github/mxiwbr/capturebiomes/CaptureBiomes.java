@@ -1,6 +1,7 @@
 package io.github.mxiwbr.capturebiomes;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import io.github.mxiwbr.capturebiomes.config.Config;
 import io.github.mxiwbr.capturebiomes.listener.EntityListener;
 import io.github.mxiwbr.capturebiomes.listener.ItemListener;
 import io.github.mxiwbr.capturebiomes.services.UpdateService;
@@ -8,7 +9,6 @@ import io.github.mxiwbr.capturebiomes.utils.ConsoleUtils;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
-import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -41,7 +41,7 @@ public final class CaptureBiomes extends JavaPlugin {
 
         // Set logger object to log from other classes
         LOGGER = getLogger();
-        logConsole("Enabled!", ConsoleUtils.logType.INFO);
+        logConsole("Enabled!", ConsoleUtils.LogType.INFO);
 
         newVersionAvailable = UpdateService.checkForUpdates();
 

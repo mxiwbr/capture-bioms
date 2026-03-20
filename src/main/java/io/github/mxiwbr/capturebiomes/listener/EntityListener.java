@@ -11,7 +11,6 @@ import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
-import org.apache.commons.text.WordUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.entity.AreaEffectCloud;
@@ -59,7 +58,7 @@ public class EntityListener implements Listener {
         if (world.getEnvironment() != World.Environment.NORMAL) {
 
             logConsole("Creation of biome bottle at " + potionEntity.getLocation() + " failed: the biome is either not supported or could not be found. " +
-                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.logType.WARNING);
+                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
             areaEffectCloud.remove();
             return;
         }
@@ -67,7 +66,7 @@ public class EntityListener implements Listener {
         // Cancel if not biome potion (key capturebiomes.biomepotion)
         if (!pdc.has(key)) { return; }
 
-        logConsole("A thrown Biome Potion was detected at: " + potionEntity.getLocation(), ConsoleUtils.logType.ADDITIONAL_INFO);
+        logConsole("A thrown Biome Potion was detected at: " + potionEntity.getLocation(), ConsoleUtils.LogType.ADDITIONAL_INFO);
 
         // the tier (level) of the potion (1 - 4)
         final int tier = pdc.get(key, PersistentDataType.INTEGER);
@@ -103,7 +102,7 @@ public class EntityListener implements Listener {
         // Refresh affected chunks for players to see the biome change instantly
         BlockUtils.refreshChunksFromBoundingBox(boundingBox, world);
 
-        logConsole("A biome of type " + biome.getKey().getKey() + " with size " + tier + " x " + tier + " was created at center " + potionEntity.getLocation(), ConsoleUtils.logType.ADDITIONAL_INFO);
+        logConsole("A biome of type " + biome.getKey().getKey() + " with size " + tier + " x " + tier + " was created at center " + potionEntity.getLocation(), ConsoleUtils.LogType.ADDITIONAL_INFO);
 
     }
 

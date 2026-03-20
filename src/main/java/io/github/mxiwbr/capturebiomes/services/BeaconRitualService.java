@@ -1,5 +1,6 @@
-package io.github.mxiwbr.capturebiomes;
+package io.github.mxiwbr.capturebiomes.services;
 
+import io.github.mxiwbr.capturebiomes.CaptureBiomes;
 import io.github.mxiwbr.capturebiomes.utils.BiomeUtils;
 import io.github.mxiwbr.capturebiomes.factories.ItemFactory;
 import io.github.mxiwbr.capturebiomes.utils.ConsoleUtils;
@@ -13,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.logConsole;
 
-public class BeaconRitual {
+public class BeaconRitualService {
 
     /**
      * Starts and manages the whole beacon ritual
@@ -29,7 +30,7 @@ public class BeaconRitual {
         if (world == null || world.getEnvironment() != World.Environment.NORMAL) {
 
             logConsole("Creation of biome bottle at " + location + " failed: the dimension is either not supported or not found. " +
-                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.logType.WARNING);
+                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
             return;
         }
 
@@ -40,7 +41,7 @@ public class BeaconRitual {
         if (BiomeUtils.getBiomeColor(biome.getKey().getKey()) == null) {
 
             logConsole("Creation of biome bottle at " + location + " failed: the biome is either not supported or could not be found. " +
-                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.logType.WARNING);
+                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
             return;
 
         }
@@ -57,7 +58,7 @@ public class BeaconRitual {
         if (potion == null) {
 
             logConsole("Creation of biome bottle at " + location + " failed: the biome is either not supported or could not be found. " +
-                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.logType.WARNING);
+                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
             return;
         }
 

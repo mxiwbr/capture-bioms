@@ -5,7 +5,7 @@ import io.github.mxiwbr.capturebiomes.CaptureBiomes;
 
 public class ConsoleUtils {
 
-    public enum logType {
+    public enum LogType {
 
         INFO,
 
@@ -20,7 +20,7 @@ public class ConsoleUtils {
      * @param message the message which should be logged in the server console
      * @param type the type of the log (INFO, ADDITIONAL_INFO, WARNING, SEVERE)
      */
-    public static void logConsole(String message, logType type) {
+    public static void logConsole(String message, LogType type) {
 
         if (CaptureBiomes.CONFIG.isEnableConsoleLogging()) {
 
