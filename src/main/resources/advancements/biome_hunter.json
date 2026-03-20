@@ -1,0 +1,18 @@
+﻿{
+  "display": {
+    "icon": {
+      "item": "minecraft:experience_bottle"
+    },
+    "title": "Biome Hunter",
+    "description": "Capture a biome",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "capture_biome": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
