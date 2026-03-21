@@ -53,7 +53,6 @@ public class CommandRegistry {
                     .executes(ctx -> {
 
                         Player player = (Player) ctx.getSource().getSender();
-
                         CommandActions.commandHelp(player);
                         return 1;
 
@@ -64,7 +63,6 @@ public class CommandRegistry {
                     .executes(ctx -> {
 
                         Player player = (Player) ctx.getSource().getSender();
-
                         CommandActions.commandReload(player);
                         return 1;
 
@@ -100,7 +98,20 @@ public class CommandRegistry {
 
             );
 
+            LiteralArgumentBuilder<CommandSourceStack> biomeCommand = Commands.literal("biome")
+                    .executes(ctx -> {
+
+                        if (!(ctx.getSource().getSender() instanceof Player player)) {
+                            return 0;
+                        }
+
+                        CommandActions.commandBiome(player);
+                        return 1;
+
+                    });
+
             // register commands
+            event.registrar().register(biomeCommand.build());
             event.registrar().register(rootCommand.build());
 
         });

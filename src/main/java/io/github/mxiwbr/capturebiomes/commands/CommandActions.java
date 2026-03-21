@@ -3,12 +3,16 @@ package io.github.mxiwbr.capturebiomes.commands;
 import io.github.mxiwbr.capturebiomes.CaptureBiomes;
 import io.github.mxiwbr.capturebiomes.config.Config;
 import io.github.mxiwbr.capturebiomes.factories.ItemFactory;
+import io.github.mxiwbr.capturebiomes.utils.BiomeUtils;
 import io.github.mxiwbr.capturebiomes.utils.ConsoleUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.Color;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
+import org.apache.commons.text.WordUtils;
 
 import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.log;
 
@@ -119,6 +123,32 @@ public class CommandActions {
             log("Successfully reloaded the config!", ConsoleUtils.LogType.ADDITIONAL_INFO);
 
         }
+
+    }
+
+    /**
+     * Writes the biome in which the executing player is standing in the chat
+     * @param player
+     */
+    public static void commandBiome(Player player) {
+
+        String biomeName = player.getLocation().getWorld().getBiome(player.getLocation()).getKey().getKey();
+        Color biomeColor = BiomeUtils.getBiomeColor(biomeName);
+
+        // Color of the biomeName in the chat
+        TextColor textColor = NamedTextColor.WHITE;
+        // Use the biomeName's color if supported by the plugin, otherwise WHITE
+        if (biomeColor != null) {
+
+            textColor = TextColor.color(
+                    biomeColor.getRed(),
+                    biomeColor.getGreen(),
+                    biomeColor.getBlue()
+            );
+        }
+
+        player.sendMessage(Component.text("You are currently standing in: ", NamedTextColor.GRAY)
+                                .append(Component.text(WordUtils.capitalizeFully(biomeName.replace("_", " ")), textColor)));
 
     }
 
