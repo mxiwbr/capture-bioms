@@ -160,6 +160,12 @@ Nether and End biomes as well as custom biomes and dimensions are currently not 
 #### ⚪ Mountains / Stony
 `Stony Peaks`, `Stony Shore`, `Jagged Peaks`, `Windswept Gravelly Hills`, `Windswept Hills`
 
+#### ⚫ Caves / Underground
+`Lush Caves`, `Dripstone Caves`, `Deep Dark`(disabled by default, configurable in config)
+
+#### 🔘 Other
+`Mushroom Fields`(disabled by default, configurable in config)
+
 ## Help
 If you need any help, please feel free to open an issue: [Open an issue](https://github.com/mxiwbr/capture-biomes/issues)
 

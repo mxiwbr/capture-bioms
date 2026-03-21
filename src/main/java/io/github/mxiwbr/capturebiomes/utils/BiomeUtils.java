@@ -47,6 +47,15 @@ public class BiomeUtils {
             // stony biomes and mountains
             case "stony_peaks", "stony_shore", "windswept_gravelly_hills", "windswept_hills" -> Color.GRAY;
 
+            // caves / underground
+            case "lush_caves" -> Color.FUCHSIA;
+            case "dripstone_caves" -> Color.fromRGB(129, 98, 85);
+
+            case "deep_dark" -> Color.BLACK;
+
+            // other
+            case "mushroom_fields" -> Color.fromRGB(129, 98, 85);
+
             default -> null;
 
         });
