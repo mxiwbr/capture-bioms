@@ -24,6 +24,8 @@ public class Config {
     private int biomePotionsAmount;
     private boolean enablePotionCooldown;
     private int potionCooldown;
+    private boolean enableMushroomFieldsBiome;
+    private boolean enableDeepDarkBiome;
     private boolean enableConsoleLogging;
     private boolean enableAdditionalConsoleLogging;
     private int timeoutTicks;
@@ -97,6 +99,16 @@ public class Config {
                 throw new ConfigLoadingException("Error when loading potion-cooldown.length. Value must be greater than 0. To disable it completely, please set potion-cooldown.enabled to false.");
             }
 
+            if (!config.isBoolean("biomes.enable-mushroom_fields")) {
+                throw new ConfigLoadingException("Error when loading biomes.enable-mushroom_fields. Has to be either true or false.");
+            }
+            this.enableMushroomFieldsBiome = config.getBoolean("biomes.enable-mushroom_fields");
+
+            if (!config.isBoolean("biomes.enable-deep_dark")) {
+                throw new ConfigLoadingException("Error when loading biomes.enable-deep_dark. Has to be either true or false.");
+            }
+            this.enableDeepDarkBiome = config.getBoolean("biomes.enable-deep_dark");
+
             if (!config.isBoolean("console.enable-logging")) {
                 throw new ConfigLoadingException("Error when loading console.enable-logging. Has to be either true or false.");
             }
@@ -139,6 +151,8 @@ public class Config {
             this.biomePotionsAmount = 1;
             this.enablePotionCooldown = true;
             this.potionCooldown = 15;
+            this.enableMushroomFieldsBiome = false;
+            this.enableDeepDarkBiome = false;
             this.enableConsoleLogging = true;
             this.enableAdditionalConsoleLogging = false;
             this.timeoutTicks = 200;

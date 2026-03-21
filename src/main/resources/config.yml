@@ -40,6 +40,12 @@ potion-cooldown:                      # cooldown of the biome potions
                                       # Has to be > 0. To disable it completely, please set potion-cooldown.enabled to false
                                       # only relevant if enabled is true
 
+# --- Biomes ---
+biomes:                               # enable or disable specific biomes (potions of these biomes that were already created will still work!)
+                                      # boolean (true / false)
+  enable-mushroom_fields: false       # default: false
+  enable-deep_dark: false             # default: false
+
 ### ADVANCED SETTINGS – only change if you know what you're doing! ###
 
 # --- Console Logging ---

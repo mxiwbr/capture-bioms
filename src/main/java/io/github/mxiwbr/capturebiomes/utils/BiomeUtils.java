@@ -1,5 +1,6 @@
 package io.github.mxiwbr.capturebiomes.utils;
 
+import io.github.mxiwbr.capturebiomes.CaptureBiomes;
 import org.bukkit.Color;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -50,11 +51,18 @@ public class BiomeUtils {
             // caves / underground
             case "lush_caves" -> Color.FUCHSIA;
             case "dripstone_caves" -> Color.fromRGB(129, 98, 85);
-
-            case "deep_dark" -> Color.BLACK;
+            // deep dark, only if enabled in config
+            case "deep_dark" -> {
+                if (CaptureBiomes.CONFIG.isEnableDeepDarkBiome()) yield Color.BLACK;
+                else yield null;
+            }
 
             // other
-            case "mushroom_fields" -> Color.fromRGB(129, 98, 85);
+            // mushroom fields, only if enabled in config
+            case "mushroom_fields" -> {
+                if (CaptureBiomes.CONFIG.isEnableMushroomFieldsBiome()) yield Color.fromRGB(129, 98, 85);
+                else yield null;
+            }
 
             default -> null;
 
