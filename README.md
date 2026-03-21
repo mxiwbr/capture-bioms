@@ -14,10 +14,10 @@ With **Capture Biomes**, you can bottle up any biome and unleash it anywhere –
 reshape your own Minecraft world exactly the way you want!
 
 ## Features
-- 🧪 Capture any biome in a **Biome Potion** using a Beacon
-- 🎨 Potion colors, names, and descriptions match the captured biome
-- 📏 Bigger Biome Potions depending on the Beacon pyramid size
-- ⚙️ Full configuration support in the `config.yml`
+🧪 Capture any biome in a **Biome Potion** using a Beacon  
+🎨 Potion colors, names, and descriptions match the captured biome  
+📏 Bigger Biome Potions depending on the Beacon pyramid size  
+⚙️ Full configuration support in the `config.yml`
 
 ## Usage
 1. Place a Beacon and power it with the usual pyramid
@@ -51,9 +51,6 @@ When thrown, the potion affects a square of `size` × `size` blocks, `size` bein
 - If there is no solid block above the center, the biome extends up to the **world's maximum height**.
 - The biome always extends **five blocks below the point where the potion lands**.
 
-## Supported Versions
-- PaperMC on Minecraft Version 1.21.11
-
 ## Commands
 
 | Command | Description                                           |
@@ -63,6 +60,9 @@ When thrown, the potion affects a square of `size` × `size` blocks, `size` bein
 | `/capturebiomes givebiomepotion <biome> <tier>` | Gives a Biome Potion of the specified biome and tier. |
 | `/capturebiomes reload` | Reloads the plugin’s configuration (`config.yml`).    |
 | `/capturebiomes help` | Shows this command overview in the ingame chat.       |
+
+## Supported Versions
+- PaperMC on Minecraft Version 1.21.11
 
 ## Config
 Edit the `config.yml` in the plugin's folder to adapt it to your preferences:
@@ -136,7 +136,7 @@ bstats:
 ```
 
 ## Supported Biomes and Dimensions
-This plugin only supports following **overworld biomes**.
+This plugin supports most **overworld biomes**.
 Nether, End and Cave biomes as well as custom biomes and dimensions are currently not supported and will be ignored.
 - 🔵 **Cold:**  
   `Deep Cold Ocean`  
@@ -149,6 +149,7 @@ Nether, End and Cave biomes as well as custom biomes and dimensions are currentl
   `Ice Spikes`  
   `Frozen Peaks`  
   `Frozen Ocean`  
+  `Frozen River`
   `Deep Frozen Ocean`
 - 🟡 **Hot:**  
   `Desert`  
@@ -156,7 +157,9 @@ Nether, End and Cave biomes as well as custom biomes and dimensions are currentl
   `Savanna Plateau`  
   `Badlands`  
   `Eroded Badlands`  
-  `Windswept Savanna`
+  `Wooded Badlands`  
+  `Windswept Savanna`  
+  `Beach`
 - 🟢 **Forest / Plains:**  
   `Forest`  
   `Birch Forest`  
@@ -171,7 +174,8 @@ Nether, End and Cave biomes as well as custom biomes and dimensions are currentl
   `Meadow`  
   `Cherry Grove`  
   `Sunflower Plains`  
-  `Plains`
+  `Plains`  
+  `Pale Garden`
 - 🟢 **Jungle:**  
   `Jungle`  
   `Bamboo Jungle`  
@@ -192,8 +196,6 @@ Nether, End and Cave biomes as well as custom biomes and dimensions are currentl
   `Jagged Peaks`  
   `Windswept Gravelly Hills`  
   `Windswept Hills`
-- ⚪ **Other:**  
-  `Pale Garden`
 
 ## Help
 If you need any help, please feel free to open an issue: [Open an issue](https://github.com/mxiwbr/capture-biomes/issues)
@@ -201,7 +203,8 @@ If you need any help, please feel free to open an issue: [Open an issue](https:/
 ## bStats
 
 This plugin uses [bStats](https://bstats.org/) to collect **anonymous statistics** like player counts and server versions.  
-All data collected is **anonymous and secure**, helping to improve the plugin.
+All data collected is **anonymous and secure**, helping to improve the plugin.  
+If you don't want the plugin to send data, disable bStats in the config.yml.
 
 ## License
 This plugin is licensed under the **GNU General Public License v3**.  

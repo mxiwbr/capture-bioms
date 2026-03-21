@@ -23,17 +23,15 @@ public class BiomeUtils {
             case "ice_spikes", "frozen_peaks", "frozen_ocean", "frozen_river", "deep_frozen_ocean" -> Color.AQUA;
 
             // hot biomes
-            case "desert" -> Color.YELLOW;
-            case "badlands", "eroded_badlands" -> Color.fromRGB(187, 101, 33);
+            case "desert", "beach" -> Color.YELLOW;
+            case "badlands", "eroded_badlands", "wooded_badlands" -> Color.fromRGB(187, 101, 33);
             case "savanna", "savanna_plateau", "windswept_savanna" -> Color.ORANGE;
+            case "pale_garden" -> Color.GRAY;
 
             // forest and plains / meadow
             case "forest", "birch_forest", "dark_forest", "flower_forest",
                  "old_growth_birch_forest", "old_growth_pine_taiga",
                  "old_growth_spruce_taiga", "windswept_forest", "grove", "taiga", "meadow", "cherry_grove", "sunflower_plains", "plains" -> Color.GREEN;
-
-            // pale
-            case "pale_garden" -> Color.GRAY;
 
             // jungle
             case "jungle", "bamboo_jungle", "sparse_jungle" -> Color.LIME;
