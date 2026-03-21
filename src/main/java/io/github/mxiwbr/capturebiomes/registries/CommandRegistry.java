@@ -59,6 +59,7 @@ public class CommandRegistry {
 
                     }));
 
+            // Gives the executing player a biome potion: /capturebiomes givebiomepotion
             rootCommand.then(Commands.literal("givebiomepotion")
                     .then(Commands.argument("biome", word())
                             .then(Commands.argument("tier", integer(1, 4))
@@ -88,6 +89,7 @@ public class CommandRegistry {
 
             );
 
+            // register commands
             event.registrar().register(rootCommand.build());
 
         });

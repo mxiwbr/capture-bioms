@@ -7,13 +7,15 @@ enabled: true                         # enable or disable the plugin's basic fun
 
 # --- Beacon ritual items ---
 beacon:
-  required-xp-bottles:                # XP bottles required for every beacon level (cannot be more than 64)
+  required-item-count:                # items required for every beacon level (cannot be more than 64)
+                                      # Have to be > 0
     tier-1: 16
     tier-2: 32
     tier-3: 48
     tier-4: 64
   biome-potions-size:                 # Effect range of the Biome Potion when used (squared → 4 = 4x4 blocks)
                                       # Have to be whole and even numbers
+                                      # Have to be > 0
                                       # See https://github.com/mxiwbr/capture-biomes/blob/main/README.md to understand how the size works
     tier-1: 4
     tier-2: 8
@@ -21,7 +23,9 @@ beacon:
     tier-4: 32
   trigger_item: EXPERIENCE_BOTTLE     # The item that must be thrown on the beacon to trigger the biome capture
                                       # See https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html for the item names
-  biome-potions-amount: 1             # default: 1 | amount of Biome Potions to get each time
+  biome-potions-amount: 1             # amount of Biome Potions to get each time
+                                      # default: 1
+                                      # Has to be > 0
 
 # --- Biome Potions ---
 potion-cooldown:                      # cooldown of the biome potions
@@ -33,9 +37,10 @@ potion-cooldown:                      # cooldown of the biome potions
 
   length: 15                          # default: 15
                                       # full seconds
+                                      # Has to be > 0. To disable it completely, please set potion-cooldown.enabled to false
                                       # only relevant if enabled is true
 
-# --- Advanced settings – only change if you know what you're doing ---
+### ADVANCED SETTINGS – only change if you know what you're doing! ###
 
 # --- Console Logging ---
 console:
@@ -50,7 +55,9 @@ console:
 # --- Item checking (for XP bottles on beacon) ---
 item-check:
   timeout-ticks: 200                  # How long the plugin checks for each item being on ground in ticks (20 ticks = 1 second)
+                                      # Has to be > 0
   interval-ticks: 2                   # Interval between each check in ticks (20 ticks = 1 second)
+                                      # Has to be > 0
 
 # --- bStats ---
 bstats:

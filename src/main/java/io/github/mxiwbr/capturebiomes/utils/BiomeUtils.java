@@ -8,9 +8,9 @@ import org.bukkit.util.BoundingBox;
 public class BiomeUtils {
 
     /**
-     * Get a matching color for a biome
+     * Get a matching color for a biome or null, if it couldn't be found
      * @param biomeKey
-     * @return Bukkit Color or null, if no color could be found
+     * @return Bukkit Color / null
      */
     public static Color getBiomeColor(String biomeKey) {
 
@@ -55,6 +55,12 @@ public class BiomeUtils {
 
     }
 
+    /**
+     * Fills a given area in a given world with a given biome
+     * @param world
+     * @param box the area which should be filled as BoundingBox
+     * @param biome
+     */
     public static void fillBiome(World world, BoundingBox box, Biome biome) {
 
         for (int x = (int) box.getMinX(); x <= box.getMaxX(); x++) {

@@ -82,7 +82,6 @@ public class ItemFactory {
         // Only apply the potion cooldown if it is enabled (default) in the config
         if (CaptureBiomes.CONFIG.isEnablePotionCooldown()) {
 
-            // set potion cooldown of 30 seconds for all biome potions
             Key cooldownGroupKey = Key.key("capturebiomes", "potion_cooldown");
             UseCooldown useCooldown = UseCooldown.useCooldown(CaptureBiomes.CONFIG.getPotionCooldown()).cooldownGroup(cooldownGroupKey).build();
             potion.setData(DataComponentTypes.USE_COOLDOWN, useCooldown);

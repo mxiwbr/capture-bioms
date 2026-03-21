@@ -31,7 +31,7 @@ public class Config {
     private boolean bstatsEnabled;
 
     /**
-     * Contains all configuration settings as private variables with getters
+     * Contains all configuration settings as private variables with getters. The constructor gets all values from the config.yml file or uses defaults, if none could be found.
      */
     public Config() {
 
@@ -40,56 +40,105 @@ public class Config {
         try {
 
             // enabled status
-            this.pluginEnabled = config.getBoolean("enabled", true);
-
-            this.triggerItem = Material.valueOf(config.getString("beacon.trigger_item", "EXPERIENCE_BOTTLE"));
-            this.biomePotionsAmount = config.getInt("beacon.biome-potions-amount", 1);
-
-            this.enablePotionCooldown = config.getBoolean("potion-cooldown.enabled", true);
-            this.potionCooldown = config.getInt("potion-cooldown.length", 15);
-
-            this.enableConsoleLogging = config.getBoolean("console.enable-logging", true);
-            this.enableAdditionalConsoleLogging = config.getBoolean("console.enable-additional-logging", false);
-
-            this.timeoutTicks = config.getInt("item-check.timeout-ticks", 200);
-            this.intervalTicks = config.getInt("item-check.interval-ticks", 2);
-
-            this.bstatsEnabled = config.getBoolean("bstats.enabled", true);
+            this.pluginEnabled = config.getBoolean("enabled");
 
             // Required items per tier
-            this.requiredItemCount = new int[] {config.getInt("beacon.required-xp-bottles.tier-1", 16),
-                    config.getInt("beacon.required-xp-bottles.tier-2", 32),
-                    config.getInt("beacon.required-xp-bottles.tier-3", 48),
-                    config.getInt("beacon.required-xp-bottles.tier-4", 64)};
+            this.requiredItemCount = new int[] {config.getInt("beacon.required-xp-bottles.tier-1"),
+                    config.getInt("beacon.required-xp-bottles.tier-2"),
+                    config.getInt("beacon.required-xp-bottles.tier-3"),
+                    config.getInt("beacon.required-xp-bottles.tier-4")};
             // Use default config if amount of required items is more than allowed (max 64)
             for (int itemCount : this.requiredItemCount) {
-                if (itemCount > 64) {
-                    throw new ConfigLoadingException("Error when loading an item of beacon.required-xp-bottles (value: " + itemCount + "). Values must not be more than 64.");
+                if (itemCount > 64 || itemCount < 1) {
+                    throw new ConfigLoadingException("Error when loading an item of beacon.required-xp-bottles (value: " + itemCount + "). Values must not be more than 64 or less than 1.");
                 }
+
             }
 
             // Amount of biome potions to get per tier
-            this.biomePotionSize = new int[]  {config.getInt("beacon.biome-potions-size.tier-1", 4),
-                    config.getInt("beacon.biome-potions-size.tier-2", 8),
-                    config.getInt("beacon.biome-potions-size.tier-3", 16),
-                    config.getInt("beacon.biome-potions-size.tier-4", 32)};
+            this.biomePotionSize = new int[]  {config.getInt("beacon.biome-potions-size.tier-1"),
+                    config.getInt("beacon.biome-potions-size.tier-2"),
+                    config.getInt("beacon.biome-potions-size.tier-3"),
+                    config.getInt("beacon.biome-potions-size.tier-4")};
             // Use default config if odd numbers occur
             for (int number : this.biomePotionSize) {
                 if (number % 2 != 0) {
                     throw new ConfigLoadingException("Error when loading an item of beacon.biome-potions-size (value: " + number + "). Values must not be odd numbers.");
                 }
+                else if (number < 1) {
+                    throw new ConfigLoadingException("Error when loading an item of beacon.biome-potions-size (value: " + number + "). Values must not be less than 1.");
+                }
             }
+
+            try {
+
+                this.triggerItem = Material.valueOf(config.getString("beacon.trigger_item"));
+
+            } catch (IllegalArgumentException e) {
+
+                throw new  ConfigLoadingException("Invalid trigger item: " + config.getString("beacon.trigger_item"));
+            }
+
+            this.biomePotionsAmount = config.getInt("beacon.biome-potions-amount");
+            if (biomePotionsAmount < 1) {
+                throw new ConfigLoadingException("Error when loading beacon.biome-potions-amount. Value must be greater than 0.");
+            }
+
+            if (!config.isBoolean("potion-cooldown.enabled")) {
+                throw new ConfigLoadingException("Error when loading potion-cooldown.enabled. Has to be either true or false.");
+            }
+            this.enablePotionCooldown = config.getBoolean("potion-cooldown.enabled");
+
+            this.potionCooldown = config.getInt("potion-cooldown.length");
+            if (potionCooldown < 1) {
+                throw new ConfigLoadingException("Error when loading potion-cooldown.length. Value must be greater than 0. To disable it completely, please set potion-cooldown.enabled to false.");
+            }
+
+            if (!config.isBoolean("console.enable-logging")) {
+                throw new ConfigLoadingException("Error when loading console.enable-logging. Has to be either true or false.");
+            }
+            this.enableConsoleLogging = config.getBoolean("console.enable-logging");
+
+            if (!config.isBoolean("console.enable-additional-logging")) {
+                throw new ConfigLoadingException("Error when loading console.enable-additional-logging. Has to be either true or false.");
+            }
+            this.enableAdditionalConsoleLogging = config.getBoolean("console.enable-additional-logging");
+
+            this.timeoutTicks = config.getInt("item-check.timeout-ticks");
+            if (timeoutTicks < 1) {
+                throw new ConfigLoadingException("Error when loading item-check.timeout-ticks. Value must be greater than 0.");
+            }
+
+            this.intervalTicks = config.getInt("item-check.interval-ticks");
+            if (intervalTicks < 1) {
+                throw new ConfigLoadingException("Error when loading item-check.interval-ticks. Value must be greater than 0.");
+            }
+
+            if (!config.isBoolean("bstats.enabled")) {
+                throw new ConfigLoadingException("Error when loading bstats.enabled. Has to be either true or false.");
+            }
+            this.bstatsEnabled = config.getBoolean("bstats.enabled");
 
         // Set to defaults if config couldn't be loaded
         } catch (Exception e) {
 
-            log("Failed to load config.yml, using default config: " + e.getMessage(), ConsoleUtils.LogType.WARNING);
-            log("If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
+            CaptureBiomes.INSTANCE.getLogger().severe("Failed to load config.yml, using default config: " + e.getMessage());
+            CaptureBiomes.INSTANCE.getLogger().severe("If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues");
 
+            this.pluginEnabled = true;
             // Required items per tier
             this.requiredItemCount = new int[] { 16, 32, 48, 64 };
             // Amount of biome potions to get per tier
             this.biomePotionSize = new int[] { 4, 8, 16, 32 };
+            this.triggerItem = Material.EXPERIENCE_BOTTLE;
+            this.biomePotionsAmount = 1;
+            this.enablePotionCooldown = true;
+            this.potionCooldown = 15;
+            this.enableConsoleLogging = true;
+            this.enableAdditionalConsoleLogging = false;
+            this.timeoutTicks = 200;
+            this.intervalTicks = 2;
+            this.bstatsEnabled = true;
 
         }
 

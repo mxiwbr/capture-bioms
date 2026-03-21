@@ -113,24 +113,8 @@ public class EntityListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
 
         Player player = event.getPlayer();
-
         if (player.isOp() && CaptureBiomes.newVersionAvailable) {
-
-            try {
-
-                player.sendMessage(Component.text("[CaptureBiomes] ", NamedTextColor.GREEN, TextDecoration.BOLD)
-                        .append(Component.text("There is a newer plugin version available: "
-                                + UpdateService.getLatestVersion()
-                                + ", you're on: "
-                                + CaptureBiomes.INSTANCE.getPluginMeta().getVersion(), NamedTextColor.GREEN)
-                                    .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE)));
-
-            }
-            catch (Exception e) {
-
-                CaptureBiomes.LOGGER.severe(e.getMessage());
-
-            }
+            UpdateService.sendUpdateMessageToPlayer(player);
         }
 
     }

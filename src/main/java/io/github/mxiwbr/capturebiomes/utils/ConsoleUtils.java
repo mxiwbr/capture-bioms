@@ -5,6 +5,10 @@ import io.github.mxiwbr.capturebiomes.CaptureBiomes;
 
 public class ConsoleUtils {
 
+    /**
+     * The types of console logging messages:
+     * INFO, ADDITIONAL_INFO, WARNING, SEVERE
+     */
     public enum LogType {
 
         INFO,

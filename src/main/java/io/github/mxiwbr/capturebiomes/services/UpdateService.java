@@ -4,6 +4,10 @@ import io.github.mxiwbr.capturebiomes.CaptureBiomes;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.github.mxiwbr.capturebiomes.utils.ConsoleUtils;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.entity.Player;
 
 import java.io.IOException;
 import java.net.URI;
@@ -17,6 +21,7 @@ public class UpdateService {
 
     /**
      * Scans the GitHub page for new releases
+     * @return true or false whether a new update is available
      */
     public static Boolean checkForUpdates() {
 
@@ -71,6 +76,30 @@ public class UpdateService {
         JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
 
         return jsonObject.get("tag_name").getAsString();
+
+    }
+
+    /**
+     * Sends the update available message to a player in the ingame chat
+     * @param player
+     */
+    public static void sendUpdateMessageToPlayer(Player player) {
+
+        try {
+
+            player.sendMessage(Component.text("[CaptureBiomes] ", NamedTextColor.GREEN, TextDecoration.BOLD)
+                    .append(Component.text("There is a newer plugin version available: "
+                                    + UpdateService.getLatestVersion()
+                                    + ", you're on: "
+                                    + CaptureBiomes.INSTANCE.getPluginMeta().getVersion(), NamedTextColor.GREEN)
+                            .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE)));
+
+        }
+        catch (Exception e) {
+
+            CaptureBiomes.LOGGER.severe(e.getMessage());
+
+        }
 
     }
 

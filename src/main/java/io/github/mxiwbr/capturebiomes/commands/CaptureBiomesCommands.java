@@ -9,6 +9,8 @@ import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
+import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.log;
+
 public class CaptureBiomesCommands {
 
     /**
@@ -24,7 +26,7 @@ public class CaptureBiomesCommands {
         }
         catch (Exception e) {
 
-            ConsoleUtils.log("Failed to give biome potion to " + player.getName() + ": " + e.getMessage(), ConsoleUtils.LogType.SEVERE);
+            log("Failed to give biome potion to " + player.getName() + ": " + e.getMessage(), ConsoleUtils.LogType.SEVERE);
             player.sendMessage(Component.text("Oops! Something went wrong and your biome potion could not be delivered.", NamedTextColor.RED));
 
         }
@@ -37,6 +39,8 @@ public class CaptureBiomesCommands {
      */
     public static void commandHelp(Player player) {
 
+        player.sendMessage(Component.text("=== Capture Biomes Commands ===", NamedTextColor.DARK_AQUA, TextDecoration.BOLD));
+        player.sendMessage(Component.text(""));
         player.sendMessage(Component.text("/capturebiomes enable", NamedTextColor.GREEN)
                 .append(Component.text(" - Enables the plugin", NamedTextColor.WHITE)));
         player.sendMessage(Component.text("/capturebiomes disable", NamedTextColor.RED)
@@ -55,11 +59,11 @@ public class CaptureBiomesCommands {
         CaptureBiomes.INSTANCE.getConfig().set("enabled", true);
         CaptureBiomes.INSTANCE.saveConfig();
 
-        player.sendMessage(Component.text("[CaptureBiomes] ", NamedTextColor.GREEN, TextDecoration.BOLD)
+        player.sendMessage(Component.text("[Capture Biomes] ", NamedTextColor.GREEN, TextDecoration.BOLD)
                 .append(Component.text("The plugin was enabled.", NamedTextColor.GREEN)
                         .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE)));
 
-        ConsoleUtils.log("The plugin was enabled by " + player.getName(), ConsoleUtils.LogType.ADDITIONAL_INFO);
+        log("The plugin was enabled by " + player.getName(), ConsoleUtils.LogType.ADDITIONAL_INFO);
 
     }
 
@@ -72,11 +76,11 @@ public class CaptureBiomesCommands {
         CaptureBiomes.INSTANCE.getConfig().set("enabled", false);
         CaptureBiomes.INSTANCE.saveConfig();
 
-        player.sendMessage(Component.text("[CaptureBiomes] ", NamedTextColor.GREEN, TextDecoration.BOLD)
+        player.sendMessage(Component.text("[Capture Biomes] ", NamedTextColor.GREEN, TextDecoration.BOLD)
                 .append(Component.text("The plugin was disabled.", NamedTextColor.RED)
                         .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE)));
 
-        ConsoleUtils.log("The plugin was disabled by " + player.getName(), ConsoleUtils.LogType.ADDITIONAL_INFO);
+        log("The plugin was disabled by " + player.getName(), ConsoleUtils.LogType.ADDITIONAL_INFO);
 
     }
 
