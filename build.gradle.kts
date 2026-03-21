@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("com.gradleup.shadow") version "9.3.1"
 }
 
 group = "io.github.mxiwbr"
@@ -14,6 +15,9 @@ repositories {
 }
 
 dependencies {
+    // bStats
+    implementation("org.bstats:bstats-bukkit:3.2.1")
+
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -32,4 +36,12 @@ tasks.test {
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
+
+tasks.shadowJar {
+    configurations = project.configurations.runtimeClasspath.map { setOf(it) }
+
+    // Relocate bStats into the plugin's package to avoid conflicts with other
+    // plugins using bStats
+    relocate("org.bstats", project.group.toString())
 }

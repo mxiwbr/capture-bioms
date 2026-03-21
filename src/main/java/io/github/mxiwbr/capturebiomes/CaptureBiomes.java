@@ -6,6 +6,7 @@ import io.github.mxiwbr.capturebiomes.listener.ItemListener;
 import io.github.mxiwbr.capturebiomes.registries.CommandRegistry;
 import io.github.mxiwbr.capturebiomes.services.UpdateService;
 import io.github.mxiwbr.capturebiomes.utils.ConsoleUtils;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -23,6 +24,9 @@ public final class CaptureBiomes extends JavaPlugin {
     // Called when the plugin is enabled
     @Override
     public void onEnable() {
+
+        final int bStatsPluginId = 30340;
+        Metrics bStatsMetrics = new Metrics(this, bStatsPluginId);
 
         // Global plugin instance object
         INSTANCE = this;
