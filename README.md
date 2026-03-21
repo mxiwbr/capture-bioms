@@ -3,6 +3,7 @@
 [![Java](https://img.shields.io/badge/Java-21-brightgreen)](https://www.java.com/)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.11-blue)](https://www.minecraft.net/)
 [![API](https://img.shields.io/badge/API-PaperMC-white)](https://papermc.io/)
+[![bStats](https://img.shields.io/badge/bStats-Active-blue)](https://bstats.org/plugin/bukkit/CaptureBiomes/30340)
 [![Plugin](https://img.shields.io/badge/Type-Plugin-yellow)](#)
 [![License](https://img.shields.io/badge/License-GPLv3-lightgrey)](https://www.gnu.org/licenses/gpl-3.0.en.html#license-text)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-brightgreen)](https://opensource.org/)
