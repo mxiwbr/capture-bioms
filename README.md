@@ -1,12 +1,13 @@
 # Capture Biomes
 
 [![Java](https://img.shields.io/badge/Java-21-brightgreen)](https://www.java.com/)
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.11-blue)](https://www.minecraft.net/)
+[![Minecraft](https://img.shields.io/badge/Minecraft_Java_Edition-1.21.11-blue)](https://www.minecraft.net/de-de/article/minecraft-java-edition-1-21-11)
 [![API](https://img.shields.io/badge/API-PaperMC-white)](https://papermc.io/)
 [![bStats](https://img.shields.io/badge/bStats-Active-blue)](https://bstats.org/plugin/bukkit/CaptureBiomes/30340)
 [![Plugin](https://img.shields.io/badge/Type-Plugin-yellow)](#)
 [![License](https://img.shields.io/badge/License-GPLv3-lightgrey)](https://www.gnu.org/licenses/gpl-3.0.en.html#license-text)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-brightgreen)](https://opensource.org/)
+[![Modrinth](https://img.shields.io/badge/Available%20on-Modrinth-00AF5C?logo=modrinth)](https://modrinth.com/project/capture-biomes)
 
 A PaperMC plugin that lets players capture a biome in a bottle and release it elsewhere.
 
