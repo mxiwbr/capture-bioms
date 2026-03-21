@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.log;
 
-public class CaptureBiomesCommands {
+public class CommandActions {
 
     /**
      * Action of the /capturebiomes givebiomepotion command: Gives the executing player a biome potion

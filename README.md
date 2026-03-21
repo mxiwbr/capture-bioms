@@ -14,10 +14,10 @@ With **Capture Biomes**, you can bottle up any biome and unleash it anywhere –
 reshape your own Minecraft world exactly the way you want!
 
 ## Features
-- **Capture Biomes** allows you to capture a biome in a bottle as a **Biome Potion** by throwing XP Bottles on a **Beacon** and release it elsewhere
-- Potion colors, names and description match the captured biome
-- Get **bigger Biome Potions** depending on the **size of the Beacon pyramid**
-- **Full control**: Edit the plugin's config to adapt it to your preferences
+- 🧪 Capture any biome in a **Biome Potion** using a Beacon
+- 🎨 Potion colors, names, and descriptions match the captured biome
+- 📏 Bigger Biome Potions depending on the Beacon pyramid size
+- ⚙️ Full configuration support in the `config.yml`
 
 ## Usage
 1. Place a Beacon and power it with the usual pyramid
@@ -35,6 +35,11 @@ The tier of the Beacon depends on the size of the pyramid:
 - 3 layers → Tier 3
 - 4 layers → Tier 4
 
+## Installation
+1. Download the latest .jar from [Modrinth](https://modrinth.com/project/capture-biomes/versions) or [GitHub](https://github.com/mxiwbr/capture-biomes/releases)
+2. Place it in your server's `plugins` folder
+3. (Optional) Configure the plugin via `config.yml` and restart the server or use the plugin's reload command
+
 ## Potion Size
 The size of a Biome Potion depends on the tier of the beacon used to create it.  
 When thrown, the potion affects a square of `size` × `size` blocks, `size` being the matching value for the Beacon tier (configurable in the `config.yml`).   
@@ -49,6 +54,16 @@ When thrown, the potion affects a square of `size` × `size` blocks, `size` bein
 ## Supported Versions
 - PaperMC on Minecraft Version 1.21.11
 
+## Commands
+
+| Command | Description                                           |
+|---------|-------------------------------------------------------|
+| `/capturebiomes disable` | Disables the plugin.                                  |
+| `/capturebiomes enable` | Enables the plugin.                                   |
+| `/capturebiomes givebiomepotion <biome> <tier>` | Gives a Biome Potion of the specified biome and tier. |
+| `/capturebiomes reload` | Reloads the plugin’s configuration (`config.yml`).    |
+| `/capturebiomes help` | Shows this command overview in the ingame chat.       |
+
 ## Config
 Edit the `config.yml` in the plugin's folder to adapt it to your preferences:
 ```
@@ -61,7 +76,7 @@ enabled: true                         # enable or disable the plugin's basic fun
 
 # --- Beacon ritual items ---
 beacon:
-  required-item-count:                # items required for every beacon level (cannot be more than 64)
+  required-item-count:                # items required for every beacon level (cannot be more than the max stack size of the trigger_item)
                                       # Have to be > 0
     tier-1: 16
     tier-2: 32

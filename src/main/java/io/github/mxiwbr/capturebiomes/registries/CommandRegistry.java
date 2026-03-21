@@ -36,7 +36,7 @@ public class CommandRegistry {
             rootCommand.then(Commands.literal("disable")
                     .executes(ctx -> {
 
-                        CaptureBiomesCommands.commandDisable((Player) ctx.getSource().getSender());
+                        CommandActions.commandDisable((Player) ctx.getSource().getSender());
                         return 1;
 
                     }));
@@ -44,7 +44,7 @@ public class CommandRegistry {
             rootCommand.then(Commands.literal("enable")
                     .executes(ctx -> {
 
-                        CaptureBiomesCommands.commandEnable((Player) ctx.getSource().getSender());
+                        CommandActions.commandEnable((Player) ctx.getSource().getSender());
                         return 1;
 
                     }));
@@ -54,7 +54,7 @@ public class CommandRegistry {
 
                         Player player = (Player) ctx.getSource().getSender();
 
-                        CaptureBiomesCommands.commandHelp(player);
+                        CommandActions.commandHelp(player);
                         return 1;
 
                     }));
@@ -65,7 +65,7 @@ public class CommandRegistry {
 
                         Player player = (Player) ctx.getSource().getSender();
 
-                        CaptureBiomesCommands.commandReload(player);
+                        CommandActions.commandReload(player);
                         return 1;
 
                     }));
@@ -85,7 +85,7 @@ public class CommandRegistry {
                                         return 0;
                                     }
 
-                                    CaptureBiomesCommands.commandGivebiomepotion(RegistryAccess
+                                    CommandActions.commandGivebiomepotion(RegistryAccess
                                             .registryAccess()
                                             .getRegistry(RegistryKey.BIOME)
                                             .get(NamespacedKey.fromString(biomeName)), IntegerArgumentType.getInteger(ctx, "tier"), player);
