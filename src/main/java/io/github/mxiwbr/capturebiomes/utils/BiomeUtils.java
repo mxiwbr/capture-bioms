@@ -19,7 +19,7 @@ public class BiomeUtils {
         return (switch (biomeKey) {
 
             // snowy biomes
-            case "snowy_tundra", "snowy_plains", "snowy_slopes", "snowy_beach", "snowy_taiga", "jagged_peaks" -> Color.WHITE;
+            case "snowy_tundra", "snowy_plains", "snowy_slopes", "snowy_beach", "snowy_taiga", "jagged_peaks", "grove" -> Color.WHITE;
             // icy biomes
             case "ice_spikes", "frozen_peaks", "frozen_ocean", "frozen_river", "deep_frozen_ocean" -> Color.AQUA;
 
@@ -32,7 +32,8 @@ public class BiomeUtils {
             // forest and plains / meadow
             case "forest", "birch_forest", "dark_forest", "flower_forest",
                  "old_growth_birch_forest", "old_growth_pine_taiga",
-                 "old_growth_spruce_taiga", "windswept_forest", "grove", "taiga", "meadow", "cherry_grove", "sunflower_plains", "plains" -> Color.GREEN;
+                 "old_growth_spruce_taiga", "windswept_forest", "taiga", "meadow", "sunflower_plains", "plains" -> Color.GREEN;
+            case "cherry_grove" -> Color.fromRGB(182, 152, 172);
 
             // jungle
             case "jungle", "bamboo_jungle", "sparse_jungle" -> Color.LIME;
@@ -49,7 +50,7 @@ public class BiomeUtils {
             case "stony_peaks", "stony_shore", "windswept_gravelly_hills", "windswept_hills" -> Color.GRAY;
 
             // caves / underground
-            case "lush_caves" -> Color.FUCHSIA;
+            case "lush_caves" -> Color.fromRGB(199, 158, 33);
             case "dripstone_caves" -> Color.fromRGB(129, 98, 85);
             // deep dark, only if enabled in config
             case "deep_dark" -> {
