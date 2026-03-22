@@ -72,7 +72,7 @@ public class ParticleFactory {
             @Override
             public void run() {
 
-                if (center.getY() + currentYOffset >= height) {
+                if (currentYOffset >= height) {
                     cancel();
                     return;
                 }
@@ -90,8 +90,8 @@ public class ParticleFactory {
                                     new Particle.DustOptions(color, 1.5f)
                             );
 
-                            // five blocks down
-                            Location locDown = center.clone().add(x + 0.5, currentYOffset - 5, z + 0.5);
+                            // down
+                            Location locDown = center.clone().add(x + 0.5, -currentYOffset, z + 0.5);
                             center.getWorld().spawnParticle(
                                     Particle.DUST,
                                     locDown,
@@ -99,8 +99,6 @@ public class ParticleFactory {
                                     new Particle.DustOptions(color, 1.5f)
                             );
                         }
-
-
                     }
                 }
 

@@ -63,7 +63,7 @@ public class CommandRegistry {
                     .executes(ctx -> {
 
                         Player player = (Player) ctx.getSource().getSender();
-                        CommandActions.commandReload(player);
+                        CommandActions.commandReloadConfig(player);
                         return 1;
 
                     }));

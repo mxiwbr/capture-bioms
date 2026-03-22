@@ -6,6 +6,7 @@ import io.github.mxiwbr.capturebiomes.factories.ItemFactory;
 import io.github.mxiwbr.capturebiomes.utils.BiomeUtils;
 import io.github.mxiwbr.capturebiomes.utils.ConsoleUtils;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -13,6 +14,8 @@ import org.bukkit.Color;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 import org.apache.commons.text.WordUtils;
+
+import java.io.File;
 
 import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.log;
 
@@ -102,13 +105,31 @@ public class CommandActions {
      * Reload the config: /capturebiomes reload
      * @param player
      */
-    public static void commandReload(Player player) {
+    public static void commandReloadConfig(Player player) {
 
         player.sendMessage(Component.text("[Capture Biomes] ", NamedTextColor.GREEN, TextDecoration.BOLD)
                 .append(Component.text("Reloading config...", NamedTextColor.GREEN)
                         .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE)));
 
         log("Reloading config...", ConsoleUtils.LogType.ADDITIONAL_INFO);
+
+        if (!(new File(CaptureBiomes.INSTANCE.getDataFolder(), "config.yml").exists())) {
+
+            player.sendMessage(Component.text("[Capture Biomes] ", NamedTextColor.GREEN, TextDecoration.BOLD)
+                    .append(Component.text("No config.yml file could be found! Please use ", NamedTextColor.RED)
+                            .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE))
+                                     .append(Component.text("/capturebiomes resetconfig", NamedTextColor.YELLOW)
+                                             .clickEvent(ClickEvent.suggestCommand("/capturebiomes resetconfig"))
+                                             .hoverEvent(Component.text("Click to insert command", NamedTextColor.YELLOW))
+                                             .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE))
+                                                        .append(Component.text(" to create a new one.", NamedTextColor.RED)
+                                                                    .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE)));
+
+            log("An error occurred when reloading the config: No config.yml file could be found!", ConsoleUtils.LogType.SEVERE);
+
+            return;
+
+        }
 
         CaptureBiomes.INSTANCE.reloadConfig();
         CaptureBiomes.CONFIG = new Config();
@@ -163,7 +184,9 @@ public class CommandActions {
             player.sendMessage(Component.text("[Capture Biomes] ", NamedTextColor.GREEN, TextDecoration.BOLD)
                     .append(Component.text("Warning: This will reset all values in config.yml! Use ", NamedTextColor.RED)
                             .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE))
-                                    .append(Component.text("/reset confirm", NamedTextColor.YELLOW)
+                                    .append(Component.text("/capturebiomes resetconfig confirm", NamedTextColor.YELLOW)
+                                            .clickEvent(ClickEvent.suggestCommand("/capturebiomes resetconfig confirm"))
+                                            .hoverEvent(Component.text("Click to insert command", NamedTextColor.YELLOW))
                                             .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE))
                                                     .append(Component.text(" to proceed.", NamedTextColor.RED)
                                                             .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE)));

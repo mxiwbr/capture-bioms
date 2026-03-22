@@ -29,8 +29,8 @@ public class BeaconRitualService {
         var world = location.getWorld();
         if (world == null || world.getEnvironment() != World.Environment.NORMAL) {
 
-            log("Creation of biome bottle at " + location + " failed: the dimension is either not supported or not found. " +
-                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
+            log("Creation of biome bottle at " + location + " failed: the dimension is either not supported or not found.", ConsoleUtils.LogType.WARNING);
+            log("If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
             return;
         }
 
@@ -40,8 +40,8 @@ public class BeaconRitualService {
         // Cancel if biome is not supported or
         if (BiomeUtils.getBiomeColor(biome.getKey().getKey()) == null) {
 
-            log("Creation of biome bottle at " + location + " failed: the biome is either not supported or could not be found. " +
-                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
+            log("Creation of biome bottle at " + location + " failed: the biome is either not supported or could not be found.", ConsoleUtils.LogType.WARNING);
+            log("If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
             return;
 
         }
@@ -57,8 +57,8 @@ public class BeaconRitualService {
         ItemStack potion = ItemFactory.createBiomePotion(biome, beaconTier);
         if (potion == null) {
 
-            log("Creation of biome bottle at " + location + " failed: the biome is either not supported or could not be found. " +
-                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
+            log("Creation of biome bottle at " + location + " failed: the biome is either not supported or could not be found.", ConsoleUtils.LogType.WARNING);
+            log("If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
             return;
         }
 

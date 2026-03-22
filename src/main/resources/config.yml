@@ -1,62 +1,69 @@
 ﻿# Capture Biomes Plugin Configuration
 
-enabled: true                         # enable or disable the plugin's basic functionalities
-                                      # commands as well as update services will still work
-                                      # boolean (true / false)
-                                      # can also be changed in game via /capturebiomes enable or /capturebiomes disable
+enabled: true                         # Enable or disable the plugin's basic functionalities
+                                      # Commands as well as update services will still work
+                                      # Boolean (true / false)
+                                      # Can also be changed in game via /capturebiomes enable or /capturebiomes disable
 
 # --- Beacon ritual items ---
 beacon:
-  required-item-count:                # items required for every beacon level (cannot be more than the max stack size of the trigger_item)
+  required-item-count:                # Items required for every beacon level (cannot be more than the max stack size of the trigger_item)
+                                      # Have to be whole numbers
                                       # Have to be > 0
     tier-1: 16
     tier-2: 32
     tier-3: 48
     tier-4: 64
   biome-potions-size:                 # Effect range of the Biome Potion when used (squared → 4 = 4x4 blocks)
-                                      # Have to be whole and even numbers
+                                      # Have to be whole numbers
                                       # Have to be > 0
                                       # See https://github.com/mxiwbr/capture-biomes/blob/main/README.md to understand how the size works
     tier-1: 4
     tier-2: 8
     tier-3: 16
     tier-4: 32
+
+    y-offset: 5                       # Determines how many blocks the biome extends below the impact point and above the first block at the center
+                                      # Has to be > 0 and < 384
+                                      # Has to be a whole number
+                                      # Default: 5
+
   trigger_item: EXPERIENCE_BOTTLE     # The item that must be thrown on the beacon to trigger the biome capture
                                       # See https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html for the item names
-  biome-potions-amount: 1             # amount of Biome Potions to get each time
-                                      # default: 1
+  biome-potions-amount: 1             # Amount of Biome Potions to get each time
+                                      # Default: 1
                                       # Has to be > 0
 
 # --- Biome Potions ---
-potion-cooldown:                      # cooldown of the biome potions
-                                      # this affects all potions created after changing this value - old items will still have the same cooldown settings!
-                                      # recommended to leave enabled to prevent players from crashing / lagging the server by throwing too many potions at once
+potion-cooldown:                      # Cooldown of the biome potions
+                                      # This affects all potions created after changing this value - old items will still have the same cooldown settings!
+                                      # Recommended to leave enabled to prevent players from crashing / lagging the server by throwing too many potions at once
 
-  enabled: true                       # default: true
-                                      # boolean (true / false)
+  enabled: true                       # Default: true
+                                      # Boolean (true / false)
 
-  length: 15                          # default: 15
-                                      # full seconds
+  length: 15                          # Default: 15
+                                      # Full seconds
                                       # Has to be > 0. To disable it completely, please set potion-cooldown.enabled to false
-                                      # only relevant if enabled is true
+                                      # Only relevant if enabled is true
 
 # --- Biomes ---
-biomes:                               # enable or disable specific biomes (potions of these biomes that were already created will still work!)
-                                      # boolean (true / false)
-  enable-mushroom_fields: false       # default: false
-  enable-deep_dark: false             # default: false
+biomes:                               # Enable or disable specific biomes (potions of these biomes that were already created will still work!)
+                                      # Boolean (true / false)
+  enable-mushroom_fields: false       # Default: false
+  enable-deep_dark: false             # Default: false
 
 ### ADVANCED SETTINGS – only change if you know what you're doing! ###
 
 # --- Console Logging ---
 console:
-  enable-logging: true                # default: true
-                                      # boolean (true / false)
-                                      # if you set this to false, all console logging will be disabled. This includes all info logs as well as warnings and severe errors
+  enable-logging: true                # Default: true
+                                      # Boolean (true / false)
+                                      # If you set this to false, all console logging will be disabled. This includes all info logs as well as warnings and severe errors
 
-  enable-additional-logging: false    # default: false
-                                      # will enable additional logging whenever an action is done by the plugin, like creating or releasing a biome potion
-                                      # only relevant if enable-logging is true
+  enable-additional-logging: false    # Default: false
+                                      # Will enable additional logging whenever an action is done by the plugin, like creating or releasing a biome potion
+                                      # Only relevant if enable-logging is true
 
 # --- Item checking (for XP bottles on beacon) ---
 item-check:
@@ -67,6 +74,6 @@ item-check:
 
 # --- bStats ---
 bstats:
-  enabled: true                       # default: true
-                                      # enables / disables sending anonymous data like amount of servers using the plugin to bStats
-                                      # see README.md section "bStats" for more information
+  enabled: true                       # Default: true
+                                      # Enables / disables sending anonymous data like amount of servers using the plugin to bStats
+                                      # See README.md section "bStats" for more information

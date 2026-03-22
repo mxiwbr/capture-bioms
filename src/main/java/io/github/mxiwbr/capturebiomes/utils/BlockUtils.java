@@ -1,5 +1,6 @@
 package io.github.mxiwbr.capturebiomes.utils;
 
+import io.github.mxiwbr.capturebiomes.CaptureBiomes;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -27,8 +28,7 @@ public class BlockUtils {
     }
 
     /**
-     * Creates a BoundingBox from a center location as well as size and height, just like
-     * ParticleFactory.createSquareRisingEdges() works.
+     * Creates a BoundingBox from a center location as well as size and height
      * Goes down 5 blocks below the center location and up to the height coordinate.
      * @param center
      * @param size
@@ -45,7 +45,7 @@ public class BlockUtils {
         double minZ = center.getZ() - half;
         double maxZ = center.getZ() + half;
 
-        double minY = center.getY() - 5;
+        double minY = center.getY() - CaptureBiomes.CONFIG.getBiomePotionSize()[4];
 
         return new BoundingBox(minX, minY, minZ, maxX, height, maxZ);
 

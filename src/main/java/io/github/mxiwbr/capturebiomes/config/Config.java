@@ -2,14 +2,10 @@ package io.github.mxiwbr.capturebiomes.config;
 
 import io.github.mxiwbr.capturebiomes.CaptureBiomes;
 import io.github.mxiwbr.capturebiomes.exceptions.ConfigLoadingException;
-import io.github.mxiwbr.capturebiomes.utils.ConsoleUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
-
-import static io.github.mxiwbr.capturebiomes.CaptureBiomes.CONFIG;
-import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.log;
 
 @Getter
 public class Config {
@@ -74,15 +70,16 @@ public class Config {
             this.biomePotionSize = new int[]  {config.getInt("beacon.biome-potions-size.tier-1"),
                     config.getInt("beacon.biome-potions-size.tier-2"),
                     config.getInt("beacon.biome-potions-size.tier-3"),
-                    config.getInt("beacon.biome-potions-size.tier-4")};
+                    config.getInt("beacon.biome-potions-size.tier-4"),
+                    config.getInt("beacon.biome-potions-size.y-offset")};
             // Use default config if odd numbers occur
             for (int number : this.biomePotionSize) {
-                if (number % 2 != 0) {
-                    throw new ConfigLoadingException("Error when loading an item of beacon.biome-potions-size (value: " + number + "). Values must not be odd numbers.");
-                }
-                else if (number < 1) {
+                if (number < 1) {
                     throw new ConfigLoadingException("Error when loading an item of beacon.biome-potions-size (value: " + number + "). Values must not be less than 1.");
                 }
+            }
+            if (biomePotionSize[4] > 384) {
+                throw new ConfigLoadingException("Error when loading beacon.biome-potions-size.y-offset (value: " + biomePotionSize[4] + "). Values must not be more than 384.");
             }
 
             this.biomePotionsAmount = config.getInt("beacon.biome-potions-amount");
@@ -147,7 +144,7 @@ public class Config {
             // Required items per tier
             this.requiredItemCount = new int[] { 16, 32, 48, 64 };
             // Amount of biome potions to get per tier
-            this.biomePotionSize = new int[] { 4, 8, 16, 32 };
+            this.biomePotionSize = new int[] { 4, 8, 16, 32, 5 };
             this.triggerItem = Material.EXPERIENCE_BOTTLE;
             this.biomePotionsAmount = 1;
             this.enablePotionCooldown = true;
@@ -175,7 +172,7 @@ public class Config {
         // Required items per tier
         CaptureBiomes.CONFIG.requiredItemCount = new int[] { 16, 32, 48, 64 };
         // Size of biome potions per tier
-        CaptureBiomes.CONFIG.biomePotionSize = new int[] { 4, 8, 16, 32 };
+        CaptureBiomes.CONFIG.biomePotionSize = new int[] { 4, 8, 16, 32, 5 };
         CaptureBiomes.CONFIG.triggerItem = Material.EXPERIENCE_BOTTLE;
         CaptureBiomes.CONFIG.biomePotionsAmount = 1;
         CaptureBiomes.CONFIG.enablePotionCooldown = true;
@@ -200,6 +197,7 @@ public class Config {
         CaptureBiomes.INSTANCE.getConfig().set("beacon.biome-potions-size.tier-2", 8);
         CaptureBiomes.INSTANCE.getConfig().set("beacon.biome-potions-size.tier-3", 16);
         CaptureBiomes.INSTANCE.getConfig().set("beacon.biome-potions-size.tier-4", 32);
+        CaptureBiomes.INSTANCE.getConfig().set("beacon.biome-potions-size.y-offset", 5);
         CaptureBiomes.INSTANCE.getConfig().set("beacon.trigger_item", "EXPERIENCE_BOTTLE");
         CaptureBiomes.INSTANCE.getConfig().set("beacon.biome-potions-amount", 1);
         CaptureBiomes.INSTANCE.getConfig().set("potion-cooldown.enabled", true);

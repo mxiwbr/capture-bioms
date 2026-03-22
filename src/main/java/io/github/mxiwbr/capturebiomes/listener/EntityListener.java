@@ -60,8 +60,8 @@ public class EntityListener implements Listener {
         // Cancel and delete areaEffectCloud if not in overworld
         if (world.getEnvironment() != World.Environment.NORMAL) {
 
-            log("Creation of biome bottle at " + potionEntity.getLocation() + " failed: the biome is either not supported or could not be found. " +
-                    "If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
+            log("Creation of biome at " + potionEntity.getLocation().getWorld() + " failed: the biome / dimension is either not supported or could not be found.", ConsoleUtils.LogType.WARNING);
+            log("If you think that this is a bug, please create an issue: https://github.com/mxiwbr/capture-bioms/issues", ConsoleUtils.LogType.WARNING);
             areaEffectCloud.remove();
             return;
         }
@@ -84,7 +84,7 @@ public class EntityListener implements Listener {
                     case 4 -> CaptureBiomes.CONFIG.getBiomePotionSize()[3];
                     default -> CaptureBiomes.CONFIG.getBiomePotionSize()[0];
                 },
-                Math.min(nextBlockY + 5, maxHeight));
+                Math.min(nextBlockY + CaptureBiomes.CONFIG.getBiomePotionSize()[4], maxHeight));
 
         // particle effect up to max world height or next block on y coordinate above the block
         ParticleFactory.createSquareRisingEdges(potionEntity.getLocation(),
@@ -95,7 +95,7 @@ public class EntityListener implements Listener {
                     case 4 -> CaptureBiomes.CONFIG.getBiomePotionSize()[3];
                     default -> CaptureBiomes.CONFIG.getBiomePotionSize()[0];
                 },
-                Math.min(nextBlockY + 5, maxHeight));
+                Math.min(nextBlockY + CaptureBiomes.CONFIG.getBiomePotionSize()[4], maxHeight));
 
         // get a bounding box representing the particle box and fill biome
         BiomeUtils.fillBiome(world, boundingBox, biome);
