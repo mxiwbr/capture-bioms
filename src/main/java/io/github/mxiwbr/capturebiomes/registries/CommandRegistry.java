@@ -59,7 +59,7 @@ public class CommandRegistry {
                     }));
 
             // Reloads the plugin's config
-            rootCommand.then(Commands.literal("reload")
+            rootCommand.then(Commands.literal("reloadconfig")
                     .executes(ctx -> {
 
                         Player player = (Player) ctx.getSource().getSender();
@@ -98,7 +98,7 @@ public class CommandRegistry {
 
             );
 
-            rootCommand.then(Commands.literal("reset")
+            rootCommand.then(Commands.literal("resetconfig")
                     .executes(ctx -> {
 
                         CommandActions.commandResetConfig((Player) ctx.getSource().getSender(), false);
@@ -127,8 +127,8 @@ public class CommandRegistry {
                     });
 
             // register commands
-            event.registrar().register(biomeCommand.build());
             event.registrar().register(rootCommand.build());
+            event.registrar().register(biomeCommand.build());
 
         });
 

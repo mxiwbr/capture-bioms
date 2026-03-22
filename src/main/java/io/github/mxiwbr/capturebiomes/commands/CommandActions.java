@@ -16,6 +16,9 @@ import org.apache.commons.text.WordUtils;
 
 import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.log;
 
+/**
+ * The class where all logic of the plugin's commands are located
+ */
 public class CommandActions {
 
     /**
@@ -54,8 +57,10 @@ public class CommandActions {
                 .append(Component.text(" - Gives a biome potion", NamedTextColor.WHITE)));
         player.sendMessage(Component.text("/capturebiomes help", NamedTextColor.GRAY)
                 .append(Component.text(" - Writes this help page in the chat", NamedTextColor.WHITE)));
-        player.sendMessage(Component.text("/capturebiomes reload", NamedTextColor.BLUE)
+        player.sendMessage(Component.text("/capturebiomes reloadconfig", NamedTextColor.BLUE)
                 .append(Component.text(" - Reloads the plugin's config", NamedTextColor.WHITE)));
+        player.sendMessage(Component.text("/capturebiomes resetconfig", NamedTextColor.DARK_RED)
+                .append(Component.text(" - Resets the plugin’s config and automatically reloads it", NamedTextColor.WHITE)));
 
     }
 
@@ -156,15 +161,19 @@ public class CommandActions {
 
         if (!confirmed) {
             player.sendMessage(Component.text("[Capture Biomes] ", NamedTextColor.GREEN, TextDecoration.BOLD)
-                    .append(Component.text("Resetting the config will reset all values in the config.yml! Use ", NamedTextColor.RED)
+                    .append(Component.text("Warning: This will reset all values in config.yml! Use ", NamedTextColor.RED)
                             .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE))
-                                    .append(Component.text("/reset confirm ", NamedTextColor.YELLOW)
+                                    .append(Component.text("/reset confirm", NamedTextColor.YELLOW)
                                             .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE))
-                                                    .append(Component.text("to confirm your decision.", NamedTextColor.RED)
+                                                    .append(Component.text(" to proceed.", NamedTextColor.RED)
                                                             .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE)));
         }
         else {
             Config.resetConfigFile();
+            player.sendMessage(Component.text("[Capture Biomes] ", NamedTextColor.GREEN, TextDecoration.BOLD)
+                    .append(Component.text("The config has been reset and reloaded successfully.", NamedTextColor.GREEN)
+                            .decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.FALSE)));
+            log("The config has been reset by " + player.getName(), ConsoleUtils.LogType.INFO);
         }
 
     }
