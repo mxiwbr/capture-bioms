@@ -63,16 +63,20 @@ public class ParticleFactory {
      */
     public static void createSquareRisingEdges(Location center, Color color, int size, double height) {
 
-        final double heightPerTick = 0.85;
-
         new BukkitRunnable() {
 
-            double currentYOffset = 0;
+            double currentYOffsetUp = 0;
+            double currentYOffsetDown = 0;
+            final double heightPerTick = 0.85;
+            final double downwardOffset = size * CaptureBiomes.CONFIG.getBiomePotionYOffsetMultiplier();
 
             @Override
             public void run() {
 
-                if (currentYOffset >= height) {
+                // calculation of absolute height
+                double maxYOffsetUp = height - center.getY();
+
+                if (currentYOffsetUp >= maxYOffsetUp && currentYOffsetDown >= downwardOffset) {
                     cancel();
                     return;
                 }
@@ -82,27 +86,32 @@ public class ParticleFactory {
                         if (x == -size / 2 || x == size / 2 || z == -size / 2 || z == size / 2) {
 
                             // up
-                            Location locUp = center.clone().add(x + 0.5, currentYOffset, z + 0.5);
-                            center.getWorld().spawnParticle(
-                                    Particle.DUST,
-                                    locUp,
-                                    1,
-                                    new Particle.DustOptions(color, 1.5f)
-                            );
+                            if (currentYOffsetUp < maxYOffsetUp) {
+                                Location locUp = center.clone().add(x + 0.5, currentYOffsetUp, z + 0.5);
+                                center.getWorld().spawnParticle(
+                                        Particle.DUST,
+                                        locUp,
+                                        1,
+                                        new Particle.DustOptions(color, 1.5f)
+                                );
+                            }
 
                             // down
-                            Location locDown = center.clone().add(x + 0.5, -currentYOffset, z + 0.5);
-                            center.getWorld().spawnParticle(
-                                    Particle.DUST,
-                                    locDown,
-                                    1,
-                                    new Particle.DustOptions(color, 1.5f)
-                            );
+                            if (currentYOffsetDown < downwardOffset) {
+                                Location locDown = center.clone().add(x + 0.5, -currentYOffsetDown, z + 0.5);
+                                center.getWorld().spawnParticle(
+                                        Particle.DUST,
+                                        locDown,
+                                        1,
+                                        new Particle.DustOptions(color, 1.5f)
+                                );
+                            }
                         }
                     }
                 }
 
-                currentYOffset += heightPerTick;
+                currentYOffsetUp += heightPerTick;
+                currentYOffsetDown += heightPerTick;
             }
 
         }.runTaskTimer(CaptureBiomes.INSTANCE, 0L, 1L);

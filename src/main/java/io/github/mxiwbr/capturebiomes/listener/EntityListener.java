@@ -25,6 +25,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.BoundingBox;
 
+import static io.github.mxiwbr.capturebiomes.CaptureBiomes.CONFIG;
 import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.log;
 
 /**
@@ -36,7 +37,7 @@ public class EntityListener implements Listener {
     public void onLingeringPotionSplash(LingeringPotionSplashEvent event) {
 
         // cancel if plugin functionalities are disabled in the config
-        if (!CaptureBiomes.CONFIG.isPluginEnabled()) { return; }
+        if (!CONFIG.isPluginEnabled()) { return; }
 
         // The potion that triggered the event
         ThrownPotion potionEntity = event.getEntity();
@@ -76,26 +77,22 @@ public class EntityListener implements Listener {
         final int maxHeight = world.getMaxHeight();
         // next block above the location where the potion was thrown
         final int nextBlockY = BlockUtils.getNextSolidBlockY(potionEntity.getLocation());
+        final int size = switch (tier) {
+            case 2 -> CONFIG.getBiomePotionSize()[1];
+            case 3 -> CONFIG.getBiomePotionSize()[2];
+            case 4 -> CONFIG.getBiomePotionSize()[3];
+            default -> CONFIG.getBiomePotionSize()[0];
+        };
 
         final BoundingBox boundingBox = BlockUtils.getBoundingBox(potionEntity.getLocation(),
-                switch (tier) {
-                    case 2 -> CaptureBiomes.CONFIG.getBiomePotionSize()[1];
-                    case 3 -> CaptureBiomes.CONFIG.getBiomePotionSize()[2];
-                    case 4 -> CaptureBiomes.CONFIG.getBiomePotionSize()[3];
-                    default -> CaptureBiomes.CONFIG.getBiomePotionSize()[0];
-                },
-                Math.min(nextBlockY + CaptureBiomes.CONFIG.getBiomePotionSize()[4], maxHeight));
+                size,
+                Math.min(nextBlockY + (CONFIG.getBiomePotionYOffsetMultiplier() * size), maxHeight));
 
         // particle effect up to max world height or next block on y coordinate above the block
         ParticleFactory.createSquareRisingEdges(potionEntity.getLocation(),
                 potionEntity.getPotionMeta().getColor(),
-                switch (tier) {
-                    case 2 -> CaptureBiomes.CONFIG.getBiomePotionSize()[1];
-                    case 3 -> CaptureBiomes.CONFIG.getBiomePotionSize()[2];
-                    case 4 -> CaptureBiomes.CONFIG.getBiomePotionSize()[3];
-                    default -> CaptureBiomes.CONFIG.getBiomePotionSize()[0];
-                },
-                Math.min(nextBlockY + CaptureBiomes.CONFIG.getBiomePotionSize()[4], maxHeight));
+                size,
+                Math.min(nextBlockY + (CONFIG.getBiomePotionYOffsetMultiplier() * size), maxHeight));
 
         // get a bounding box representing the particle box and fill biome
         BiomeUtils.fillBiome(world, boundingBox, biome);
@@ -103,7 +100,7 @@ public class EntityListener implements Listener {
         // Refresh affected chunks for players to see the biome change instantly
         BlockUtils.refreshChunksFromBoundingBox(boundingBox, world);
 
-        log("A biome of type " + biome.getKey().getKey() + " with size " + CaptureBiomes.CONFIG.getBiomePotionSize()[tier - 1] + " x " + CaptureBiomes.CONFIG.getBiomePotionSize()[tier - 1] + " was created at center " + potionEntity.getLocation(), ConsoleUtils.LogType.ADDITIONAL_INFO);
+        log("A biome of type " + biome.getKey().getKey() + " with size " + CONFIG.getBiomePotionSize()[tier - 1] + " x " + CONFIG.getBiomePotionSize()[tier - 1] + " was created at center " + potionEntity.getLocation(), ConsoleUtils.LogType.ADDITIONAL_INFO);
 
     }
 

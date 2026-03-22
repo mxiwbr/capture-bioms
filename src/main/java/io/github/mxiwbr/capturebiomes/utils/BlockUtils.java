@@ -8,6 +8,8 @@ import org.bukkit.util.BoundingBox;
 
 import java.util.ArrayList;
 
+import static io.github.mxiwbr.capturebiomes.CaptureBiomes.CONFIG;
+
 public class BlockUtils {
 
     /**
@@ -45,7 +47,7 @@ public class BlockUtils {
         double minZ = center.getZ() - half;
         double maxZ = center.getZ() + half;
 
-        double minY = center.getY() - CaptureBiomes.CONFIG.getBiomePotionSize()[4];
+        double minY = center.getY() - (CONFIG.getBiomePotionYOffsetMultiplier() * size);
 
         return new BoundingBox(minX, minY, minZ, maxX, height, maxZ);
 

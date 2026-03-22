@@ -42,15 +42,15 @@ The tier of the Beacon depends on the size of the pyramid:
 
 ## Potion Size
 The size of a Biome Potion depends on the tier of the beacon used to create it.  
-When thrown, the potion affects a square of `size` × `size` blocks, `size` being the matching value for the Beacon tier (configurable in the `config.yml`).   
+When thrown, the potion affects a cuboid of `size` × `size` × `size` blocks, `size` being the matching value for the Beacon tier (configurable in the `config.yml`).   
 
-**Example:** A potion created on a tier 2 Beacon affects an area of 8 × 8 blocks, with the location where the potion lands as the center.
+**Example:** A potion created on a tier 2 Beacon affects an area of 8 × 8 × 8 blocks, with the location where the potion lands as the center.
 
 **Height behavior:**
-- If there is a solid block above the center coordinate (e.g. in a cave), the biome extends up to **five blocks above that block**.
+- If there is a solid block above the center coordinate (e.g. in a cave), the biome extends up to **`size` blocks above that block**.
 - If there is no solid block above the center, the biome extends up to the **world's maximum height**.
-- The biome always extends **five blocks below the point where the potion lands**.
-- The amount of blocks to extend up- and downwards is **configurable in the config.yml**.
+- The biome always extends **`size` blocks below the point where the potion lands**.
+- The amount of blocks to extend up- and downwards is **configurable in the config.yml** by modifying the `y-offset-multiplier`.
 
 ## Commands
 
@@ -97,12 +97,14 @@ beacon:
     tier-3: 16
     tier-4: 32
 
-    # Vertical range of biome spread
-    # Affects:
-    # - blocks BELOW impact point
-    # - blocks ABOVE first block at the center's y-axis
-    # Range: 1–383
-    y-offset: 5
+    # Vertical range of biome spread (multiplier)
+    # Determines how many blocks the biome extends:
+    # - BELOW the impact point
+    # - ABOVE the first solid block at the center's y-axis
+    # The actual range (up and down) is calculated by multiplying the base size of the potion by this multiplier
+    # Must be a floating-point number >= 0.0 and <= 5.0
+    # Setting this to 0.0 will completely disable the vertical offset
+    y-offset-multiplier: 1.0
 
   trigger_item: EXPERIENCE_BOTTLE # Item used to trigger the ritual
   biome-potions-amount: 1         # Amount of potions to get each time (> 0)
@@ -123,7 +125,8 @@ biomes:
   enable-deep_dark: false
 
 # =========================================
-# Advanced Settings
+# Advanced Settings – only modify if you know what you're doing!
+# Misconfiguring these could potentially break the plugin or cause unexpected behavior.
 # =========================================
 
 console:
