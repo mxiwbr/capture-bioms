@@ -9,8 +9,11 @@ import io.github.mxiwbr.capturebiomes.factories.ParticleFactory;
 import org.bukkit.*;
 import org.bukkit.block.Beacon;
 import org.bukkit.block.Biome;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 import static io.github.mxiwbr.capturebiomes.utils.ConsoleUtils.log;
 
@@ -53,6 +56,27 @@ public class BeaconRitualService {
         // Remove the items that are for the beacon ritual
         ItemUtils.removeItemsFromStack(item, requiredBottleAmount);
 
+        // the center location above the beacon
+        Location center = beacon.getLocation().add(0.5, 1, 0.5);
+
+        world.spawnParticle(Particle.EXPLOSION, center, 1);
+        world.playSound(center, Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
+
+        // boost all items away from the beacon
+        for (Entity entity : world.getNearbyEntities(center, 2, 2, 2)) {
+
+            if (!(entity instanceof Item itemEntity)) continue;
+
+            Vector direction = center.toVector()
+                    .subtract(itemEntity.getLocation().toVector())
+                    .normalize();
+
+            direction.multiply(0.7);
+            direction.setY(0.6);
+
+            itemEntity.setVelocity(direction);
+        }
+
         // create potion from ItemFactory
         ItemStack potion = ItemFactory.createBiomePotion(biome, beaconTier);
         if (potion == null) {
@@ -66,8 +90,18 @@ public class BeaconRitualService {
         potion.setAmount(CaptureBiomes.CONFIG.getBiomePotionsAmount());
         ParticleFactory.createParticleSpiral(beacon.getLocation(), BiomeUtils.getBiomeColor(biome.getKey().getKey()));
         // drop potion on location and play sound
-        world.dropItemNaturally(location, potion);
+        world.dropItem(location, potion).setVelocity(new Vector(0, 0, 0));
         world.playSound(location, Sound.ENTITY_ITEM_PICKUP, 1, 1);
+
+        // fake block change to disable the beacon beam for a short time
+        for (Player player : world.getPlayers()) {
+
+            if (player.getLocation().distance(center) < 20) {
+
+                player.sendBlockChange(beacon.getLocation(), Material.GLASS.createBlockData());
+                player.sendBlockChange(beacon.getLocation(), Material.BEACON.createBlockData());
+            }
+        }
 
     }
 
