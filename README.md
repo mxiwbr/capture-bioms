@@ -193,4 +193,4 @@ This plugin is licensed under the **GNU General Public License v3**.
 
 ## Credits
 
-Developed by **mxiwbr** (https://github.com/mxiwbr)
+Developed by [**mxiwbr**](https://github.com/mxiwbr)
