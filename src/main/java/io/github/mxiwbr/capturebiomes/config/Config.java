@@ -135,6 +135,7 @@ public class Config {
             this.bstatsEnabled = config.getBoolean("bstats.enabled");
 
             this.loadFailed = false;
+            CaptureBiomes.INSTANCE.getLogger().info("Successfully loaded config.yml.");
 
         // Set to defaults if config couldn't be loaded
         } catch (Exception e) {

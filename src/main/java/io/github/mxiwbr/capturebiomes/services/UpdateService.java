@@ -36,8 +36,7 @@ public class UpdateService {
             // Check if new version is available and log it
             if (!pluginVersion.equals(latestPluginVersion)) {
 
-                log("A new plugin version is available: " + latestPluginVersion, ConsoleUtils.LogType.INFO);
-                log("You're on: " + pluginVersion, ConsoleUtils.LogType.INFO);
+                log("A new plugin version is available: " + latestPluginVersion + ", you're on: " + pluginVersion, ConsoleUtils.LogType.INFO);
 
                 return true;
             }

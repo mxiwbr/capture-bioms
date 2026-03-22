@@ -28,6 +28,7 @@ public final class CaptureBiomes extends JavaPlugin {
         // Global plugin instance object
         INSTANCE = this;
 
+        this.getLogger().info("Loading config.yml...");
         // creates a default config.yml if there is none
         this.saveDefaultConfig();
         // Loads config defaults from plugin resource
