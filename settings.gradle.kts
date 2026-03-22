@@ -1,1 +1,1 @@
-rootProject.name = "capture-bioms"
+rootProject.name = "capture-biomes"
