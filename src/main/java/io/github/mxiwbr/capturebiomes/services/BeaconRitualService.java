@@ -96,7 +96,7 @@ public class BeaconRitualService {
         // fake block change to disable the beacon beam for a short time
         for (Player player : world.getPlayers()) {
 
-            if (player.getLocation().distance(center) < 20) {
+            if (player.getLocation().distance(center) < 70) {
 
                 player.sendBlockChange(beacon.getLocation(), Material.GLASS.createBlockData());
                 player.sendBlockChange(beacon.getLocation(), Material.BEACON.createBlockData());
