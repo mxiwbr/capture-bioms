@@ -1,7 +1,7 @@
 # Capture Biomes
 
 [![Java](https://img.shields.io/badge/Java-21-brightgreen)](https://www.java.com/)
-[![Minecraft](https://img.shields.io/badge/Minecraft_Java_Edition-1.21.11-blue)](https://www.minecraft.net/de-de/article/minecraft-java-edition-1-21-11)
+[![Minecraft](https://img.shields.io/badge/Minecraft_Java_Edition-1.21.5_to_1.21.11-blue)](https://www.minecraft.net/de-de/article/minecraft-java-edition-1-21-11)
 [![API](https://img.shields.io/badge/API-PaperMC-white)](https://papermc.io/)
 [![bStats](https://img.shields.io/badge/bStats-Active-blue)](https://bstats.org/plugin/bukkit/CaptureBiomes/30340)
 [![Plugin](https://img.shields.io/badge/Type-Plugin-yellow)](#)
@@ -65,7 +65,7 @@ When thrown, the potion affects a cuboid of `size` × `size` × `size` blocks, `
 | `/biome`                                        | Shows the biome you are currently standing in.                                                                      | Everyone |
 
 ## Supported Versions
-- PaperMC on Minecraft Version 1.21.11
+- PaperMC on Minecraft Versions 1.21.5 - 1.21.11
 
 ## Config
 Edit the `config.yml` in the plugin's folder to adapt it to your preferences:
