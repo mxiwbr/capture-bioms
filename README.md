@@ -70,85 +70,72 @@ When thrown, the potion affects a square of `size` × `size` blocks, `size` bein
 ## Config
 Edit the `config.yml` in the plugin's folder to adapt it to your preferences:
 ```
-# Capture Biomes Plugin Configuration
+# =========================================
+# Capture Biomes - Configuration
+# =========================================
 
-enabled: true                         # Enable or disable the plugin's basic functionalities
-                                      # Commands as well as update services will still work
-                                      # Boolean (true / false)
-                                      # Can also be changed in game via /capturebiomes enable or /capturebiomes disable
+enabled: true # Enable/disable plugin functionality
 
-# --- Beacon ritual items ---
+# =========================================
+# Beacon Settings
+# =========================================
 beacon:
-  required-item-count:                # Items required for every beacon level (cannot be more than the max stack size of the trigger_item)
-                                      # Have to be whole numbers
-                                      # Have to be > 0
+
+  # Required items per beacon tier
+  # Must be > 0 and <= max stack size of trigger_item
+  required-item-count:
     tier-1: 16
     tier-2: 32
     tier-3: 48
     tier-4: 64
-  biome-potions-size:                 # Effect range of the Biome Potion when used (squared → 4 = 4x4 blocks)
-                                      # Have to be whole numbers
-                                      # Have to be > 0
-                                      # See https://github.com/mxiwbr/capture-biomes/blob/main/README.md to understand how the size works
+
+  # Size of biome potions (NxN area)
+  # Must be > 0
+  biome-potions-size:
     tier-1: 4
     tier-2: 8
     tier-3: 16
     tier-4: 32
 
-    y-offset: 5                       # Determines how many blocks the biome extends below the impact point and above the first block at the center
-                                      # Has to be > 0 and < 384
-                                      # Has to be a whole number
-                                      # Default: 5
+    # Vertical range of biome spread
+    # Affects:
+    # - blocks BELOW impact point
+    # - blocks ABOVE first block at the center's y-axis
+    # Range: 1–383
+    y-offset: 5
 
-  trigger_item: EXPERIENCE_BOTTLE     # The item that must be thrown on the beacon to trigger the biome capture
-                                      # See https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html for the item names
-  biome-potions-amount: 1             # Amount of Biome Potions to get each time
-                                      # Default: 1
-                                      # Has to be > 0
+  trigger_item: EXPERIENCE_BOTTLE # Item used to trigger the ritual
+  biome-potions-amount: 1         # Amount of potions to get each time (> 0)
 
-# --- Biome Potions ---
-potion-cooldown:                      # Cooldown of the biome potions
-                                      # This affects all potions created after changing this value - old items will still have the same cooldown settings!
-                                      # Recommended to leave enabled to prevent players from crashing / lagging the server by throwing too many potions at once
+# =========================================
+# Biome Potion Settings
+# =========================================
+potion-cooldown:
+  enabled: true  # Enable cooldown
+  length: 15     # Seconds (> 0)
 
-  enabled: true                       # Default: true
-                                      # Boolean (true / false)
+# =========================================
+# Biome Toggles
+# =========================================
+# Already created potions are NOT affected
+biomes:
+  enable-mushroom_fields: false
+  enable-deep_dark: false
 
-  length: 15                          # Default: 15
-                                      # Full seconds
-                                      # Has to be > 0. To disable it completely, please set potion-cooldown.enabled to false
-                                      # Only relevant if enabled is true
+# =========================================
+# Advanced Settings
+# =========================================
 
-# --- Biomes ---
-biomes:                               # Enable or disable specific biomes (potions of these biomes that were already created will still work!)
-                                      # Boolean (true / false)
-  enable-mushroom_fields: false       # Default: false
-  enable-deep_dark: false             # Default: false
-
-### ADVANCED SETTINGS – only change if you know what you're doing! ###
-
-# --- Console Logging ---
 console:
-  enable-logging: true                # Default: true
-                                      # Boolean (true / false)
-                                      # If you set this to false, all console logging will be disabled. This includes all info logs as well as warnings and severe errors
+  enable-logging: true
+  enable-additional-logging: false # Extra debug logs
 
-  enable-additional-logging: false    # Default: false
-                                      # Will enable additional logging whenever an action is done by the plugin, like creating or releasing a biome potion
-                                      # Only relevant if enable-logging is true
-
-# --- Item checking (for XP bottles on beacon) ---
 item-check:
-  timeout-ticks: 200                  # How long the plugin checks for each item being on ground in ticks (20 ticks = 1 second)
-                                      # Has to be > 0
-  interval-ticks: 2                   # Interval between each check in ticks (20 ticks = 1 second)
-                                      # Has to be > 0
+  timeout-ticks: 200  # Total duration (20 ticks = 1s)
+  interval-ticks: 2   # Check interval
 
-# --- bStats ---
 bstats:
-  enabled: true                       # Default: true
-                                      # Enables / disables sending anonymous data like amount of servers using the plugin to bStats
-                                      # See README.md section "bStats" for more information
+  enabled: true
 ```
 
 #### Resetting the config
