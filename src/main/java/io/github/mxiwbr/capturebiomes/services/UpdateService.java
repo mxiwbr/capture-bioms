@@ -1,5 +1,6 @@
 package io.github.mxiwbr.capturebiomes.services;
 
+import com.google.gson.JsonArray;
 import io.github.mxiwbr.capturebiomes.CaptureBiomes;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -55,26 +56,26 @@ public class UpdateService {
     }
 
     /**
-     * Gets latest plugin version from GitHub and returns it as string
+     * Gets latest plugin version from Modrinth (Modrinth API) and returns it as string
      * @throws IOException
      * @throws InterruptedException
      */
     public static String getLatestVersion() throws IOException, InterruptedException {
 
-        // Get latest plugin release from GitHub
-        var httpClient = HttpClient.newHttpClient();
-        var httpRequest = HttpRequest.newBuilder()
-                .uri(URI.create("https://api.github.com/repos/mxiwbr/capture-biomes/releases/latest"))
-                .header("Accept", "application/vnd.github.v3+json")
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create("https://api.modrinth.com/v2/project/capture-biomes/version?featured=true&include_changelog=false"))
+                .header("User-Agent", "CaptureBiomes " + CaptureBiomes.INSTANCE.getPluginMeta().getVersion())
                 .build();
         HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         httpClient.close();
 
-        // Parse response to JSON and get the release tag as string
         String jsonString = httpResponse.body();
-        JsonObject jsonObject = JsonParser.parseString(jsonString).getAsJsonObject();
+        JsonArray jsonObject = JsonParser.parseString(jsonString).getAsJsonArray();
 
-        return jsonObject.get("tag_name").getAsString();
+        JsonObject latestVersion = jsonObject.get(0).getAsJsonObject();
+
+        return latestVersion.get("version_number").getAsString();
 
     }
 
