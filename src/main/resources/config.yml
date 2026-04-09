@@ -26,7 +26,7 @@ beacon:
     tier-4: 32
 
     # Vertical range of biome spread (multiplier)
-    # Determines how many blocks the biome extends:
+    # Determines how much the biome extends:
     # - BELOW the impact point
     # - ABOVE the first solid block at the center's y-axis
     # The actual range (up and down) is calculated by multiplying the base size of the potion by this multiplier
@@ -40,6 +40,7 @@ beacon:
 # =========================================
 # Biome Potion Settings
 # =========================================
+# Already created potions are NOT affected
 potion-cooldown:
   enabled: true  # Enable cooldown
   length: 15     # Seconds (> 0)
