@@ -65,7 +65,8 @@ When thrown, the potion affects a cuboid of `size` × `size` × `size` blocks, `
 | `/biome`                                        | Shows the biome you are currently standing in.                                                                      | Everyone |
 
 ## Supported Versions
-- PaperMC on Minecraft Versions 1.21.5 - 26.1.1
+- PaperMC on Minecraft Versions 1.21.5 - 26.1.2
+- PurpurMC on Minecraft Versions 1.21.5 - 26.1.2
 
 ## Config
 Edit the `config.yml` in the plugin's folder to adapt it to your preferences:
